@@ -1,0 +1,47 @@
+# Sistema operativo y editores
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Entornos y secretos locales
+.venv/
+venv/
+env/
+.env
+.env.*
+
+# Python, Jupyter y herramientas
+__pycache__/
+*.py[cod]
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+
+# Imagenes originales y artefactos visuales pesados
+data/images/*
+!data/images/.gitkeep
+*.[Hh][Ee][Ii][Cc]
+*.[Hh][Ee][Ii][Ff]
+*.[Jj][Pp][Gg]
+*.[Jj][Pp][Ee][Gg]
+*.[Pp][Nn][Gg]
+*.[Tt][Ii][Ff]
+*.[Tt][Ii][Ff][Ff]
+
+# Salidas regenerables; se conserva el dataset preparado final
+output/*
+!output/gas_prices.csv
+
+# Temporales de LaTeX; el PDF final si se versiona
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
