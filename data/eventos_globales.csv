@@ -1,0 +1,3 @@
+evento_id,fecha_inicio,fecha_fin,tipo_evento,descripcion,impacto_esperado,importancia,fuente_url
+OPEC-2026-07-05,2026-07-05,2026-07-05,OPEP,Ajuste de produccion de 188 mil barriles diarios anunciado por OPEP+,BAJA,3,https://www.opec.org/pr-detail/1835609-5-july-2026.html
+NHC-BERTHA-2026,2026-07-19,2026-07-23,CLIMA,Tormenta tropical Bertha en el Golfo de Mexico,INCIERTO,2,https://www.nhc.noaa.gov/archive/2026/BERTHA.shtml
