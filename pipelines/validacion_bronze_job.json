@@ -1,0 +1,32 @@
+{
+  "run_name": "equipo-05-validacion-bronze",
+  "timeout_seconds": 900,
+  "tasks": [
+    {
+      "task_key": "validar",
+      "notebook_task": {
+        "notebook_path": "/Users/fue22944@uvg.edu.gt/PF-ML/01_bronze",
+        "base_parameters": {"dry_run": "true"}
+      },
+      "timeout_seconds": 300
+    },
+    {
+      "task_key": "ingerir",
+      "depends_on": [{"task_key": "validar"}],
+      "notebook_task": {
+        "notebook_path": "/Users/fue22944@uvg.edu.gt/PF-ML/01_bronze",
+        "base_parameters": {"dry_run": "false"}
+      },
+      "timeout_seconds": 300
+    },
+    {
+      "task_key": "repetir",
+      "depends_on": [{"task_key": "ingerir"}],
+      "notebook_task": {
+        "notebook_path": "/Users/fue22944@uvg.edu.gt/PF-ML/01_bronze",
+        "base_parameters": {"dry_run": "false"}
+      },
+      "timeout_seconds": 300
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "fuente_url": "https://mem.gob.gt/wp-content/uploads/2026/11/Precios-Promedio-Nacionales-Diarios-2026.xlsx",
+  "sha256": "42d54bd9d4fdd9454c51842eb1533cc968ab21f381a458ba81da317b033d8bfd",
+  "filas": 11436,
+  "fecha_min": "2013-02-08",
+  "fecha_max": "2026-11-10",
+  "nota": "Serie MEM ciudad capital. No equivale al precio de la estación fotografiada. Archivo retrospectivo: validar revisiones y fechas de publicación para backtest operacional."
+}

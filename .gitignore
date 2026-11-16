@@ -10,6 +10,12 @@ venv/
 env/
 .env
 .env.*
+!.env.example
+.databrickscfg
+*.pem
+*.key
+id_rsa*
+id_ed25519*
 
 # Python, Jupyter y herramientas
 __pycache__/
@@ -32,6 +38,7 @@ data/images/*
 *.[Pp][Nn][Gg]
 *.[Tt][Ii][Ff]
 *.[Tt][Ii][Ff][Ff]
+!docs/arquitectura.png
 
 # Salidas regenerables; se conserva el dataset preparado final
 output/*
@@ -45,3 +52,8 @@ output/*
 *.out
 *.synctex.gz
 *.toc
+
+# Documentación de trabajo y referencias provisionales locales
+docs/*.md
+data/referencias_ocr_visual.csv
+scripts/vision_ocr.py

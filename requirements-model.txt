@@ -1,0 +1,12 @@
+# Python 3.12. Tesseract es opcional; RapidOCR no requiere un servicio externo.
+numpy==2.2.6
+pandas==2.3.3
+scipy==1.15.3
+scikit-learn==1.6.1
+joblib==1.6.0
+Pillow==11.3.0
+pillow-heif==1.1.1
+opencv-python==5.0.0.93
+rapidocr-onnxruntime==1.4.4
+onnxruntime==1.32.0
+openpyxl==3.1.5
