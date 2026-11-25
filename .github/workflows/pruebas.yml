@@ -1,0 +1,43 @@
+name: Pruebas del proyecto
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: |
+            requirements-test.txt
+            requirements-api.lock
+      - name: Instalar dependencias de pruebas
+        run: python -m pip install -r requirements-test.txt
+      - name: Ejecutar pruebas sin credenciales
+        run: python -m unittest discover -s tests -v
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: tests/ui/package-lock.json
+      - name: Instalar dependencias de pruebas de interfaz
+        run: npm --prefix tests/ui ci --no-audit --no-fund
+      - name: Probar interacciones de la interfaz
+        run: npm --prefix tests/ui test
+      - name: Verificar sintaxis y formato de cambios
+        run: |
+          python -m compileall -q src scripts pipelines api
+          for script in scripts/*.sh tests/consultas_api.sh; do bash -n "$script"; done
+          git diff --check
