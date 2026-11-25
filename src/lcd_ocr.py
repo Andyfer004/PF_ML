@@ -20,6 +20,7 @@ from pillow_heif import register_heif_opener
 from rapidocr_onnxruntime import RapidOCR
 
 from src.price_quality import parse_price, identify_panel_fuels, transaction_unit_price, quarantine_review_flags
+from src.photo_metadata import extract_metadata
 
 register_heif_opener()
 SLOTS = ("diesel", "regular", "super", "vpower")
@@ -274,6 +275,7 @@ class LCDExtractor:
             results=quarantine_review_flags(results,self.review_flags)
             return {"foto_origen":source_uri or str(source),"fecha":observed.isoformat() if observed else None,
                     "pantallas_detectadas":0,"resultados":results,"metodo":"etiquetas_genericas"}
+        metadata=extract_metadata(all_lines)
         mapping=identify_panel_fuels(regions,all_lines,image.height)
         slot_readings=[]
         for index in range(len(regions)):
@@ -297,7 +299,7 @@ class LCDExtractor:
                             "precio_q_galon": reading["precio"], "estado": reading["estado"],
                             "plantilla": "shell_4_lcd", "version_extractor": VERSION,
                             "motivos_revision": [] if reading["precio"] else ["SIN_CONSENSO" if index is not None else "COMBUSTIBLE_NO_IDENTIFICADO"],
-                            "lectura": reading, "bbox": regions[index]["bbox"] if index is not None else None})
+                            "lectura": reading, "bbox": regions[index]["bbox"] if index is not None else None,**metadata})
         unit=transaction_unit_price(all_lines,image.height)
         if unit is not None:
             accepted=[parse_price(row["precio_q_galon"]) for row in results if row["precio_q_galon"]]

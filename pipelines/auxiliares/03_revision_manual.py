@@ -18,8 +18,10 @@ from PIL import Image, ImageOps
 from pillow_heif import register_heif_opener
 
 register_heif_opener()
-project_path = Path("/Workspace/Users/fue22944@uvg.edu.gt/PF-ML")
+dbutils.widgets.text("workspace_path", "/Workspace/Users/fue22944@uvg.edu.gt/PF-ML")
+project_path = Path(dbutils.widgets.get("workspace_path"))
 template_path = project_path / "evaluacion_ocr_manual.csv"
+if not template_path.exists():template_path = project_path / "data/evaluacion_ocr_manual.csv"
 with template_path.open(newline="", encoding="utf-8") as stream:
     template = list(csv.DictReader(stream))
 options = [row["foto_origen"] for row in template]

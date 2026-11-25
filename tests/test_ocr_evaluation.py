@@ -38,3 +38,13 @@ class EvaluationTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+class IllegibleReviewTests(unittest.TestCase):
+    def test_confirmed_illegible_photo_counts_as_review_without_inventing_ground_truth(self):
+        report={'resultados':[{'foto_origen':'photo.HEIC','combustible':'super','precio_q_galon':None}]}
+        refs=[{'foto_origen':'photo.HEIC','revisor':'equipo','confirmado_equipo':'true','observaciones':'Las pantallas no se pueden leer'}]
+        result=evaluate(report,refs)
+        self.assertEqual(result['fotos_con_referencia_humana'],1)
+        self.assertEqual(result['fotos_con_referencia_legible'],0)
+        self.assertEqual(result['precios_esperados'],0)
+        self.assertIsNone(result['exactitud_incluyendo_omisiones'])

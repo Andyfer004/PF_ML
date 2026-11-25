@@ -20,7 +20,7 @@ def init_worker():
     cv2.setNumThreads(2)
     ENGINE = LCDExtractor()
     CODE_SIGNATURE = b"".join((ROOT / filename).read_bytes() for filename in
-                               ("src/lcd_ocr.py","src/price_quality.py","src/generic_ocr.py",
+                               ("src/lcd_ocr.py","src/price_quality.py","src/generic_ocr.py","src/photo_metadata.py",
                                 "data/ocr_layout_templates.json","data/ocr_review_flags.csv"))
 
 
@@ -62,7 +62,8 @@ if __name__ == "__main__":
             results.append(result)
             if len(results) % 5 == 0:
                 print(f"Procesadas {len(results)}/{len(records)}", flush=True)
-    report = {"version": "lcd-consensus-labels-v3", "fotos": len(results), "fotos_detalle": results,
+    from src.lakehouse import code_signature
+    report = {"version": "lcd-consensus-labels-v3", "firma_codigo":code_signature(ROOT), "fotos": len(results), "fotos_detalle": results,
               "resultados": [row for item in results for row in item["resultados"]],
               "errores_foto": [item for item in results if item.get("error")]}
     report["candidatos"] = sum(row["precio_q_galon"] is not None for row in report["resultados"])
