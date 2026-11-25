@@ -12,6 +12,9 @@ env/
 .env.*
 !.env.example
 .databrickscfg
+.aws/
+.ssh/
+.codex/
 *.pem
 *.key
 id_rsa*
@@ -24,6 +27,7 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+node_modules/
 .ipynb_checkpoints/
 .coverage
 htmlcov/
@@ -39,6 +43,9 @@ data/images/*
 *.[Tt][Ii][Ff]
 *.[Tt][Ii][Ff][Ff]
 !docs/arquitectura.png
+!docs/arquitectura_usuario.png
+!docs/evidencias/fase4/*.png
+!docs/flujo_capas.png
 
 # Salidas regenerables; se conserva el dataset preparado final
 output/*
@@ -57,3 +64,14 @@ output/*
 docs/*.md
 data/referencias_ocr_visual.csv
 scripts/vision_ocr.py
+
+# Archivos de trabajo y revisión locales
+tmp/
+.chart-data-*/
+
+# Resultados generados cuando los notebooks corren dentro de Git folders
+/resultado_*.json
+/ocr_seed.json
+/referencias_ocr_revisadas.json
+/precios_fotos_candidatos.csv
+/ocr_resultado_validado.json

@@ -1,0 +1,26 @@
+{
+  "cluster_name": "equipo-03-desarrollo",
+  "spark_version": "16.4.x-scala2.12",
+  "node_type_id": "i3.xlarge",
+  "num_workers": 0,
+  "autotermination_minutes": 20,
+  "data_security_mode": "SINGLE_USER",
+  "single_user_name": "fue22944@uvg.edu.gt",
+  "policy_id": "001860279AB694B6",
+  "apply_policy_default_values": true,
+  "spark_conf": {
+    "spark.databricks.cluster.profile": "singleNode",
+    "spark.master": "local[*, 4]"
+  },
+  "custom_tags": {
+    "ResourceClass": "SingleNode",
+    "Proyecto": "equipo-03-gasolina-gt"
+  },
+  "aws_attributes": {
+    "availability": "ON_DEMAND",
+    "zone_id": "auto",
+    "spot_bid_price_percent": 100
+  },
+  "enable_elastic_disk": true,
+  "runtime_engine": "STANDARD"
+}
