@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import argparse
 import csv
 import json
@@ -7,10 +9,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-import cv2
 import numpy as np
-from PIL import Image, ImageOps
-from pillow_heif import register_heif_opener
 
 if __package__:
     from .external_data import (
@@ -32,7 +31,6 @@ else:
     )
 
 
-register_heif_opener()
 FUELS = ("diesel", "regular", "super", "vpower")
 MATCH_TOLERANCE = 0.02
 
@@ -92,6 +90,9 @@ def obtener_metadata_completa(ruta_archivo: Path) -> dict[str, Any]:
         # -n conserva GPS y otros campos numericos como numeros en el JSON.
         return json.loads(run_command(["exiftool", "-j", "-n", str(ruta_archivo)]))[0]
     except (FileNotFoundError, RuntimeError, json.JSONDecodeError):
+        from PIL import Image
+        from pillow_heif import register_heif_opener
+        register_heif_opener()
         with Image.open(ruta_archivo) as image:
             exif = {
                 str(key): str(value)
@@ -118,6 +119,9 @@ def metadata_resumen(metadata: dict[str, Any]) -> dict[str, Any]:
 
 
 def abrir_imagen_orientada(ruta_archivo: Path, max_width: int = 1600) -> Image.Image:
+    from PIL import Image, ImageOps
+    from pillow_heif import register_heif_opener
+    register_heif_opener()
     with Image.open(ruta_archivo) as image:
         oriented = ImageOps.exif_transpose(image).convert("RGB")
     if oriented.width > max_width:
@@ -144,6 +148,7 @@ def order_box_points(points: np.ndarray) -> np.ndarray:
 
 def detectar_pantallas_precios(image: Image.Image, output_dir: Path) -> dict[str, str]:
     """Detecta y rectifica los cuatro LCD inferiores usando solo OpenCV."""
+    import cv2
     bgr = cv2.cvtColor(np.asarray(image), cv2.COLOR_RGB2BGR)
     height, width = bgr.shape[:2]
     blue, green, red = cv2.split(bgr)
