@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#142136" />
+    <meta
+      name="description"
+      content="Precios de combustibles en Guatemala, predicciones y resultados del proyecto CC3105 del equipo 5."
+    />
+    <title>Gasolina GT · Equipo 05</title>
+    <link rel="icon" href="/ui-assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/ui-assets/styles.css" />
+    <script src="/ui-assets/app.js" defer></script>
+  </head>
+  <body>
+    <svg
+      class="icon-definitions"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <defs>
+        <symbol id="i-pump" viewBox="0 0 24 24">
+          <path
+            d="M4 21V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v17M3 21h12M6 6h6v6H6zM14 9h2l2 3v6a2 2 0 0 0 4 0V9l-4-4M20 7v4h2"
+          />
+        </symbol>
+        <symbol id="i-grid" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7" rx="1.4" />
+          <rect x="14" y="3" width="7" height="7" rx="1.4" />
+          <rect x="3" y="14" width="7" height="7" rx="1.4" />
+          <rect x="14" y="14" width="7" height="7" rx="1.4" />
+        </symbol>
+        <symbol id="i-chart" viewBox="0 0 24 24">
+          <path d="M4 3v17h17M7 15l4-5 4 3 6-8" />
+        </symbol>
+        <symbol id="i-spark" viewBox="0 0 24 24">
+          <path d="m12 3 2.8 6.2L21 12l-6.2 2.8L12 21l-2.8-6.2L3 12l6.2-2.8z" />
+        </symbol>
+        <symbol id="i-layers" viewBox="0 0 24 24">
+          <path d="m12 3 10 5-10 5L2 8zM2 12l10 5 10-5M2 16l10 5 10-5" />
+        </symbol>
+        <symbol id="i-code" viewBox="0 0 24 24">
+          <path d="m8 6-6 6 6 6m8-12 6 6-6 6m-2-15-4 18" />
+        </symbol>
+        <symbol id="i-refresh" viewBox="0 0 24 24">
+          <path
+            d="M20 7a9 9 0 0 0-15-2L2 8m0-5v5h5M4 17a9 9 0 0 0 15 2l3-3m0 5v-5h-5"
+          />
+        </symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 7v5l3 2" />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+          <path d="m5 12 4 4L19 6" />
+        </symbol>
+        <symbol id="i-info" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 11v6m0-10v.5" />
+        </symbol>
+        <symbol id="i-down" viewBox="0 0 24 24">
+          <path d="m3 6 7 7 4-4 7 9m-6 0h6v-6" />
+        </symbol>
+        <symbol id="i-up" viewBox="0 0 24 24">
+          <path d="m3 18 7-7 4 4 7-9m-6 0h6v6" />
+        </symbol>
+        <symbol id="i-flat" viewBox="0 0 24 24">
+          <path d="M4 12h16M16 8l4 4-4 4" />
+        </symbol>
+        <symbol id="i-book" viewBox="0 0 24 24">
+          <path
+            d="M4 3h12a2 2 0 0 1 2 2v16H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m-3 15a3 3 0 0 1 3-3h12M8 7h6m-6 4h6"
+          />
+        </symbol>
+        <symbol id="i-file" viewBox="0 0 24 24">
+          <path d="M14 2H5v20h14V7zM14 2v5h5M8 12h8m-8 4h6" />
+        </symbol>
+        <symbol id="i-copy" viewBox="0 0 24 24">
+          <rect x="8" y="8" width="13" height="13" rx="2" />
+          <path d="M16 8V3H3v13h5" />
+        </symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </symbol>
+        <symbol id="i-chevron" viewBox="0 0 24 24">
+          <path d="m9 5 7 7-7 7" />
+        </symbol>
+        <symbol id="i-play" viewBox="0 0 24 24">
+          <path d="m7 3 14 9-14 9z" />
+        </symbol>
+        <symbol id="i-warning" viewBox="0 0 24 24">
+          <path d="m12 3 10 18H2zM12 9v5m0 3v.5" />
+        </symbol>
+      </defs>
+    </svg>
+    <a class="skip-link" href="#contenido">Ir al contenido</a>
+    <aside class="sidebar" id="sidebar" aria-label="Navegación principal">
+      <a class="brand" href="#resumen" aria-label="Gasolina GT, inicio"
+        ><span class="brand-mark"
+          ><svg class="icon"><use href="#i-pump" /></svg></span
+        ><span
+          >gasolina<span class="brand-gt">GT</span
+          ><small>OBSERVATORIO DE PRECIOS</small></span
+        ></a
+      >
+      <div class="sidebar-label">EL PROYECTO</div>
+      <nav class="nav-list">
+        <a href="#resumen" data-view="resumen"
+          ><svg class="icon"><use href="#i-grid" /></svg>Resumen</a
+        >
+        <a href="#historico" data-view="historico"
+          ><svg class="icon"><use href="#i-chart" /></svg>Histórico de
+          precios</a
+        >
+        <a href="#predicciones" data-view="predicciones"
+          ><svg class="icon"><use href="#i-spark" /></svg>Predicciones</a
+        >
+        <a href="#pipeline" data-view="pipeline"
+          ><svg class="icon"><use href="#i-layers" /></svg>Pipeline y OCR</a
+        >
+        <a href="#api" data-view="api"
+          ><svg class="icon"><use href="#i-code" /></svg>Probar la API<span
+            class="nav-small"
+            >GET</span
+          ></a
+        >
+      </nav>
+      <div class="sidebar-bottom">
+        <a class="docs-link" href="/docs" target="_blank" rel="noopener"
+          ><svg class="icon"><use href="#i-book" /></svg>Documentación de la
+          API</a
+        >
+        <div class="team">
+          <span class="team-avatar">03</span
+          ><span
+            ><strong>Equipo 05</strong
+            ><small>CC3105 · Proyecto final</small></span
+          >
+        </div>
+      </div>
+    </aside>
+    <div class="sidebar-overlay" id="sidebar-overlay" hidden></div>
+    <div class="workspace">
+      <header class="topbar">
+        <button
+          class="icon-button mobile-menu"
+          id="menu-button"
+          type="button"
+          aria-label="Abrir navegación"
+          aria-expanded="false"
+          aria-controls="sidebar"
+        >
+          <svg class="icon"><use href="#i-menu" /></svg>
+        </button>
+        <div class="breadcrumb">
+          <span>Guatemala</span><span class="breadcrumb-separator">/</span
+          ><strong id="breadcrumb-current">Resumen</strong>
+        </div>
+        <div
+          id="service-status"
+          class="service-status loading"
+          aria-live="polite"
+        >
+          <span class="status-dot"></span>Conectando a la API
+        </div>
+      </header>
+      <main id="contenido" tabindex="-1">
+        <div class="page-heading">
+          <div>
+            <p class="eyebrow" id="page-eyebrow">COMBUSTIBLES EN GUATEMALA</p>
+            <h1 id="page-title">Precios y predicciones</h1>
+            <p class="page-description" id="page-description">
+              Una vista de los precios, su historia y lo que estima el modelo.
+            </p>
+          </div>
+          <button class="button button-white" id="refresh-button" type="button">
+            <svg class="icon"><use href="#i-refresh" /></svg
+            ><span>Actualizar</span>
+          </button>
+        </div>
+        <div class="source-toolbar" id="source-toolbar">
+          <div class="source-control">
+            <span class="control-label">Fuente</span>
+            <div class="segmented" role="group" aria-label="Fuente de precios">
+              <button type="button" data-source="mem" aria-pressed="true">
+                Referencia MEM</button
+              ><button type="button" data-source="fotos" aria-pressed="false">
+                Fotografías
+              </button>
+            </div>
+          </div>
+          <span class="toolbar-note"
+            ><svg class="icon"><use href="#i-clock" /></svg
+            ><span id="cutoff-label">Consultando publicación</span></span
+          >
+        </div>
+        <div id="data-notice" class="notice" hidden></div>
+        <div id="view-content" aria-live="polite">
+          <div class="initial-loading">
+            <span class="loader"></span>Cargando los datos de la API…
+          </div>
+        </div>
+        <noscript
+          ><div class="notice">
+            Activa JavaScript para consultar la API y explorar el dashboard.
+          </div></noscript
+        >
+        <footer class="page-footer">
+          <span>Precios en quetzales por galón · Semana de martes a lunes</span
+          ><span id="last-refresh">Gasolina GT · Equipo 05</span>
+        </footer>
+      </main>
+    </div>
+    <div id="toast" class="toast" role="status" hidden></div>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+{
+  "equipo": 5,
+  "verificado_el": "2026-11-24T20:14:12.318000-06:00",
+  "pipeline": {
+    "nombre": "equipo-03-pipeline",
+    "estado": "SUCCESS",
+    "ejecuciones_validadas": 10,
+    "run_id": 592769852166445,
+    "url": "https://dbc-5490c6a5-5215.cloud.databricks.com/?o=7474655525361249#job/164482682079093/run/592769852166445",
+    "schedule": {
+      "quartz_cron_expression": "0 0 10 ? * TUE",
+      "timezone_id": "America/Guatemala",
+      "pause_status": "UNPAUSED"
+    },
+    "tareas": [
+      {
+        "capa": "bronze",
+        "estado": "SUCCESS",
+        "duracion_segundos": 17
+      },
+      {
+        "capa": "silver",
+        "estado": "SUCCESS",
+        "duracion_segundos": 65
+      },
+      {
+        "capa": "gold",
+        "estado": "SUCCESS",
+        "duracion_segundos": 147
+      }
+    ]
+  },
+  "datos": {
+    "fotos": 110,
+    "aceptados": 126,
+    "rechazados": 278,
+    "observaciones_mem": 11427,
+    "duplicados_nueva_carga": 0
+  },
+  "ocr": {
+    "fotos_revisadas": 20,
+    "precios_esperados": 33,
+    "precios_extraidos": 18,
+    "precios_correctos": 17,
+    "exactitud_incluyendo_omisiones": 0.5151515151515151,
+    "cobertura": 0.5454545454545454,
+    "precision_sobre_extraidos": 0.9444444444444444
+  },
+  "alertas": {
+    "configuradas": true,
+    "prueba_controlada_verificada": true,
+    "recepcion_confirmada": true
+  },
+  "reglas_calidad": [
+    "Combustible en el catálogo: súper, regular o diésel.",
+    "Precio entre Q10 y Q80 por galón.",
+    "Fecha válida y no posterior al corte.",
+    "Precios contradictorios en una misma llave van a rechazo."
+  ],
+  "documentos": [
+    {
+      "id": "informe",
+      "titulo": "Informe técnico",
+      "tipo": "PDF · 5 páginas"
+    },
+    {
+      "id": "presentacion",
+      "titulo": "Presentación",
+      "tipo": "PDF · 10 diapositivas"
+    },
+    {
+      "id": "resumen",
+      "titulo": "Resumen para el jurado",
+      "tipo": "PDF · 1 página"
+    },
+    {
+      "id": "arquitectura",
+      "titulo": "Arquitectura",
+      "tipo": "Diagrama · PNG"
+    }
+  ],
+  "estado_documentos": "Documentos de entrega del equipo",
+  "nota": "Resumen de la última validación integral conservada. Los precios, predicciones y métricas se consultan en la API.",
+  "orquestacion": {
+    "computo": "serverless",
+    "parametros_equipo": {
+      "proyecto": "03",
+      "recursos_temporales": "05"
+    },
+    "evidencia": "Datos obtenidos de la API de Databricks; no son capturas del workspace.",
+    "ejecuciones": [
+      {
+        "run_id": 128298002079637,
+        "foto": "IMG_7665.HEIC",
+        "semana_foto": "2026-01-27",
+        "fecha_exif": "2026-01-28",
+        "resultado": "SUCCESS",
+        "duraciones_segundos": {
+          "bronze": 41.0,
+          "silver": 76.0,
+          "gold": 165.0
+        },
+        "url": "https://dbc-5490c6a5-5215.cloud.databricks.com/?o=7474655525361249#job/164482682079093/run/128298002079637"
+      },
+      {
+        "run_id": 592769852166445,
+        "foto": "IMG_8271.HEIC",
+        "semana_foto": "2026-07-07",
+        "fecha_exif": "2026-07-09",
+        "resultado": "SUCCESS",
+        "duraciones_segundos": {
+          "bronze": 17.0,
+          "silver": 65.0,
+          "gold": 147.0
+        },
+        "url": "https://dbc-5490c6a5-5215.cloud.databricks.com/?o=7474655525361249#job/164482682079093/run/592769852166445"
+      }
+    ]
+  }
+}

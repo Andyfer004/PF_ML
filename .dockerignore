@@ -1,0 +1,15 @@
+*
+!requirements-api.lock
+!api/
+!api/**
+!docs/
+!docs/informe.pdf
+!docs/arquitectura_usuario.png
+!presentacion/
+!presentacion/presentacion_jurado.pdf
+!presentacion/resumen_jurado.pdf
+**/.env
+**/.env.*
+!api/.env.example
+**/__pycache__/
+**/*.pyc
