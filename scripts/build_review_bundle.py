@@ -45,6 +45,9 @@ if __name__ == '__main__':
     credential_evidence=ROOT/'output/verificacion_credenciales_env.json'
     if credential_evidence.exists():
         evidence['credenciales_api']=json.loads(credential_evidence.read_text())
+    for key,name in (('gitfolder','gitfolders.json'),('github_actions','github_actions.json')):
+        proof=ROOT/'docs/evidencias'/name
+        if proof.exists():evidence[key]=json.loads(proof.read_text())
     (ROOT / 'docs/evidencia_operativa.json').write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + '\n')
     raw = subprocess.run(['git', 'ls-files', '-co', '--exclude-standard', '-z'],
                          cwd=ROOT, capture_output=True, check=True).stdout.decode()

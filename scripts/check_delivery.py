@@ -61,6 +61,10 @@ def audit():
     professor_ok=professor.get('puede_disparar_job_por_permiso',False) and all(
         e.get('puede_administrar',False) for e in professor.get('experimentos_mlflow',[])) and bool(professor.get('experimentos_mlflow'))
     if not professor_ok:pending.append('Permisos: comprobar acceso de la cuenta del profesor al Job y a MLflow.')
+    gitfolder_path=ROOT/'docs/evidencias/gitfolders.json'
+    gitfolder=json.loads(gitfolder_path.read_text()) if gitfolder_path.exists() else {}
+    ci_path=ROOT/'docs/evidencias/github_actions.json'
+    ci=json.loads(ci_path.read_text()) if ci_path.exists() else {}
     return {
         'fecha': datetime.now(ZoneInfo('America/Guatemala')).isoformat(),
         'archivos_faltantes': missing,
@@ -72,6 +76,9 @@ def audit():
         'alertas_fallo_configuradas': bool(recipients),
         'destinatarios_alerta_fallo': recipients,
         'acceso_profesor_verificado_por_acl':professor_ok,
+        'gitfolder_conectado':gitfolder.get('job_conectado',False),
+        'github_actions_verificado':ci.get('conclusion')=='success',
+        'capturas_adjuntas':all((ROOT/'docs/evidencias/fase4'/name).is_file() for name in ('historial_job.png','ejecucion_128298002079637.png','ejecucion_592769852166445.png')),
         'pendientes_externos_o_manuales': pending + [
             'Computo: el workspace acepta solo serverless; queda pendiente la conformidad docente frente al requisito de clusters clasicos.',
             'Equipo: incorporar aportes reales de los demas integrantes; no se inventan autorias.',

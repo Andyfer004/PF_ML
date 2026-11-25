@@ -1,12 +1,12 @@
 {
   "equipo": 5,
-  "verificado_el": "2026-11-24T20:14:12.318000-06:00",
+  "verificado_el": "2026-11-25T01:50:57.609000-06:00",
   "pipeline": {
     "nombre": "equipo-03-pipeline",
     "estado": "SUCCESS",
-    "ejecuciones_validadas": 10,
-    "run_id": 592769852166445,
-    "url": "https://dbc-5490c6a5-5215.cloud.databricks.com/?o=7474655525361249#job/164482682079093/run/592769852166445",
+    "ejecuciones_validadas": 11,
+    "run_id": 267528779754207,
+    "url": "https://dbc-5490c6a5-5215.cloud.databricks.com/?o=7474655525361249#job/164482682079093/run/267528779754207",
     "schedule": {
       "quartz_cron_expression": "0 0 10 ? * TUE",
       "timezone_id": "America/Guatemala",
@@ -16,17 +16,17 @@
       {
         "capa": "bronze",
         "estado": "SUCCESS",
-        "duracion_segundos": 17
+        "duracion_segundos": 48
       },
       {
         "capa": "silver",
         "estado": "SUCCESS",
-        "duracion_segundos": 65
+        "duracion_segundos": 77
       },
       {
         "capa": "gold",
         "estado": "SUCCESS",
-        "duracion_segundos": 147
+        "duracion_segundos": 162
       }
     ]
   },

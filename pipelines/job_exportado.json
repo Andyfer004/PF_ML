@@ -18,7 +18,7 @@
       "task_key": "bronze",
       "run_if": "ALL_SUCCESS",
       "notebook_task": {
-        "notebook_path": "/Users/fue22944@uvg.edu.gt/PF-ML/01_bronze",
+        "notebook_path": "/Users/fue22944@uvg.edu.gt/PF_ML/pipelines/01_bronze",
         "base_parameters": {
           "source_path": "{{job.parameters.source_path}}",
           "dry_run": "false",
@@ -44,7 +44,7 @@
       ],
       "run_if": "ALL_SUCCESS",
       "notebook_task": {
-        "notebook_path": "/Users/fue22944@uvg.edu.gt/PF-ML/02_silver",
+        "notebook_path": "/Users/fue22944@uvg.edu.gt/PF_ML/pipelines/02_silver",
         "base_parameters": {
           "fecha_corte": "{{job.parameters.fecha_corte}}",
           "equipo": "{{job.parameters.equipo}}",
@@ -75,7 +75,7 @@
       ],
       "run_if": "ALL_SUCCESS",
       "notebook_task": {
-        "notebook_path": "/Users/fue22944@uvg.edu.gt/PF-ML/03_gold",
+        "notebook_path": "/Users/fue22944@uvg.edu.gt/PF_ML/pipelines/03_gold",
         "base_parameters": {
           "fecha_corte": "{{job.parameters.fecha_corte}}",
           "fuente_modelo": "{{job.parameters.fuente_modelo}}",
@@ -135,7 +135,7 @@
     },
     {
       "name": "workspace_path",
-      "default": "/Workspace/Users/fue22944@uvg.edu.gt/PF-ML"
+      "default": "/Workspace/Users/fue22944@uvg.edu.gt/PF_ML"
     },
     {
       "name": "catalog",

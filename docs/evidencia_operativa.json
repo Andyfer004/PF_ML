@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-11-25T01:42:38.695619-06:00",
+  "fecha": "2026-11-25T01:51:26.843596-06:00",
   "fuente": "Databricks Jobs API y HTTP por SSH al Droplet; no son capturas de UI",
   "ejecuciones": [
     {
@@ -280,6 +280,47 @@
           "run_id": 464058908228744,
           "execution_duration": 133000,
           "setup_duration": 1000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 267528779754207,
+      "tareas": [
+        {
+          "task_key": "bronze",
+          "run_id": 214131483123534,
+          "execution_duration": 48000,
+          "setup_duration": 3000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "silver",
+          "run_id": 222307676259559,
+          "execution_duration": 77000,
+          "setup_duration": 2000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "gold",
+          "run_id": 881227203970967,
+          "execution_duration": 162000,
+          "setup_duration": 2000,
           "state": {
             "life_cycle_state": "TERMINATED",
             "result_state": "SUCCESS",
@@ -1381,5 +1422,58 @@
       "/prediccion?combustible=regular": 200,
       "/prediccion?combustible=diesel": 200
     }
+  },
+  "gitfolder": {
+    "equipo": 5,
+    "repo_id": 1177503535372264,
+    "url": "https://github.com/Andyfer004/PF_ML.git",
+    "path": "/Users/fue22944@uvg.edu.gt/PF_ML",
+    "branch": "main",
+    "head_commit_id": "905aedebfdc1ca8332f26d5603ba57e6170194fe",
+    "notebooks": {
+      "bronze": "/Users/fue22944@uvg.edu.gt/PF_ML/pipelines/01_bronze",
+      "silver": "/Users/fue22944@uvg.edu.gt/PF_ML/pipelines/02_silver",
+      "gold": "/Users/fue22944@uvg.edu.gt/PF_ML/pipelines/03_gold"
+    },
+    "job_id": 164482682079093,
+    "job_conectado": true,
+    "prueba_job": {
+      "run_id": 267528779754207,
+      "estado": "SUCCESS",
+      "url": "https://dbc-5490c6a5-5215.cloud.databricks.com/?o=7474655525361249#job/164482682079093/run/267528779754207",
+      "commit_del_gitfolder_al_ejecutar": "905aedebfdc1ca8332f26d5603ba57e6170194fe",
+      "tareas": [
+        {
+          "capa": "bronze",
+          "estado": "SUCCESS",
+          "notebook_path": "/Users/fue22944@uvg.edu.gt/PF_ML/pipelines/01_bronze",
+          "execution_duration_ms": 48000
+        },
+        {
+          "capa": "silver",
+          "estado": "SUCCESS",
+          "notebook_path": "/Users/fue22944@uvg.edu.gt/PF_ML/pipelines/02_silver",
+          "execution_duration_ms": 77000
+        },
+        {
+          "capa": "gold",
+          "estado": "SUCCESS",
+          "notebook_path": "/Users/fue22944@uvg.edu.gt/PF_ML/pipelines/03_gold",
+          "execution_duration_ms": 162000
+        }
+      ],
+      "filas_bronce": 110,
+      "nuevas_fotos": 0
+    }
+  },
+  "github_actions": {
+    "conclusion": "success",
+    "createdAt": "2026-11-25T07:47:26Z",
+    "databaseId": 45570892180,
+    "headSha": "7cf7a42ab5bd7b3e169de648c37c4f92cf1311f2",
+    "status": "completed",
+    "updatedAt": "2026-11-25T07:48:04Z",
+    "url": "https://github.com/Andyfer004/PF_ML/actions/runs/45570892180",
+    "workflowName": "Pruebas del proyecto"
   }
 }

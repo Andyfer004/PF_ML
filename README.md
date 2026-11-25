@@ -2,6 +2,8 @@
 
 Proyecto final de CC3105, Universidad del Valle de Guatemala. **Equipo 5.**
 
+[![Pruebas del proyecto](https://github.com/Andyfer004/PF_ML/actions/workflows/pruebas.yml/badge.svg)](https://github.com/Andyfer004/PF_ML/actions/workflows/pruebas.yml)
+
 El proyecto convierte fotografías de precios en tablas Delta y clasifica si súper, regular y diésel suben, bajan o se mantienen la semana siguiente. Usa semanas de martes a lunes y precios en quetzales por galón. Las fotografías y el histórico oficial del MEM se conservan como fuentes separadas.
 
 - **Demo pública:** [interfaz web](http://165.22.137.8:8000/).
@@ -91,12 +93,14 @@ Para desarrollar OCR y entrenar localmente, instalar además `requirements-model
    databricks auth login --host https://dbc-5490c6a5-5215.cloud.databricks.com --profile PF-ML
    ```
 
-2. Clonar `https://github.com/Andyfer004/PF_ML.git` como Git folder dentro del usuario del equipo. Las tareas ejecutan `pipelines/01_bronze`, `pipelines/02_silver` y `pipelines/03_gold`; `workspace_path` debe apuntar a la raíz del clon con prefijo `/Workspace`. Los widgets reciben rutas, catálogo, fecha de corte, fuente y umbral.
+2. El Git folder está creado en `/Users/fue22944@uvg.edu.gt/PF_ML`, conectado a `main` del repositorio público. Las tareas del Job apuntan a `pipelines/01_bronze`, `pipelines/02_silver` y `pipelines/03_gold` dentro de ese clon. `workspace_path` es `/Workspace/Users/fue22944@uvg.edu.gt/PF_ML`. Los widgets reciben rutas, catálogo, fecha de corte, fuente y umbral. Para sincronizar cambios y comprobar esa conexión, ejecutar `python scripts/sync_git_folder.py --update-job`.
 3. Usar **Run now** en el Job compartido. Bronce carga binarios con `binaryFile` y `MERGE`; Plata reutiliza la caché o ejecuta OCR y guarda rechazos; Oro recalcula indicadores, registra MLflow y publica Parquet.
 4. Para importar una copia independiente al directorio histórico del workspace, usar `python scripts/workspace_deploy.py`. Esta alternativa no reemplaza el Git folder.
 5. `scripts/run_pipeline.py` permite ejecutar y conservar evidencia por API. Mantiene el cómputo del Job existente; no seleccionar `--compute classic` en este workspace.
 
 El Job operativo está programado los martes a las 10:00, `America/Guatemala`, y avisa por correo si falla. La prueba controlada y recepción están documentadas en [evidencia de alerta](docs/evidencia_alerta.json). El profesor tiene acceso heredado al Job y los experimentos MLflow.
+
+La [ejecución 267528779754207](https://dbc-5490c6a5-5215.cloud.databricks.com/jobs/164482682079093/runs/267528779754207?o=7474655525361249) terminó con las tres tareas en `SUCCESS` desde el Git folder. Releyó una fotografía existente, conservó las 110 filas de Bronce y reutilizó las 110 extracciones OCR. La evidencia registra las rutas de los notebooks y el commit probado.
 
 **Cómputo real:** serverless, con Python 3.12.3 y Spark 4.2.0 registrados. El workspace rechazó crear un Job Cluster clásico porque solo admite serverless. `pipelines/computo_documentado.json` detalla las librerías reales por tarea; la conformidad docente frente al requisito de cómputo clásico sigue siendo una salvedad.
 
@@ -148,3 +152,5 @@ Las [tres capturas](docs/evidencias/fase4/README.md) documentan el historial y d
 El pipeline tiene pruebas de carga incremental, rechazo conservador, idempotencia, validación temporal y filtros de API. GitHub Actions instala dependencias y ejecuta las suites Python y Node sin credenciales. Las capturas complementan la evidencia obtenida por API.
 
 Los aportes de los demás integrantes y la entrega del resumen al jurado 48 horas antes se gestionan por el equipo. Las predicciones históricas demuestran el modelo evaluado; actualizar las fuentes es necesario para producir un pronóstico vigente.
+
+[Verificación de Git folders](docs/evidencias/gitfolders.json) y [ejecución validada de GitHub Actions](docs/evidencias/github_actions.json) conservan los identificadores y commits comprobados, sin credenciales.
