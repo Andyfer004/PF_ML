@@ -1,0 +1,55 @@
+{
+  "modo": "serverless",
+  "versiones_por_tarea": {
+    "bronze": {
+      "modo_configurado": "serverless",
+      "python": "3.12.3",
+      "spark": "4.2.0",
+      "librerias_instaladas": {
+        "scikit-learn": "1.7.2",
+        "pandas": "2.3.3",
+        "scipy": "1.16.3",
+        "mlflow-skinny": "3.12.0"
+      },
+      "infraestructura": "Runtime, nodos, workers y terminación gestionados por Databricks; no equivalen a un cluster clásico configurable",
+      "autorizacion_docente_serverless": "PENDIENTE"
+    },
+    "silver": {
+      "modo_configurado": "serverless",
+      "python": "3.12.3",
+      "spark": "4.2.0",
+      "librerias_instaladas": {
+        "pillow-heif": "1.1.1",
+        "rapidocr-onnxruntime": "1.4.4",
+        "opencv-python": "4.11.0.86",
+        "openpyxl": "3.1.5",
+        "scikit-learn": "1.7.2",
+        "pandas": "2.3.3",
+        "scipy": "1.16.3",
+        "mlflow-skinny": "3.12.0"
+      },
+      "infraestructura": "Runtime, nodos, workers y terminación gestionados por Databricks; no equivalen a un cluster clásico configurable",
+      "autorizacion_docente_serverless": "PENDIENTE"
+    },
+    "gold": {
+      "modo_configurado": "serverless",
+      "python": "3.12.3",
+      "spark": "4.2.0",
+      "librerias_instaladas": {
+        "scikit-learn": "1.6.1",
+        "pandas": "2.3.3",
+        "scipy": "1.15.3",
+        "mlflow-skinny": "3.12.0"
+      },
+      "infraestructura": "Runtime, nodos, workers y terminación gestionados por Databricks; no equivalen a un cluster clásico configurable",
+      "autorizacion_docente_serverless": "PENDIENTE"
+    }
+  },
+  "fecha_corte": "2026-11-24",
+  "runtime_databricks": "Gestionado por Databricks; no se configura una versión DBR clásica",
+  "tipo_nodo": "Gestionado por Databricks",
+  "workers": "Gestionados por Databricks",
+  "autoterminacion": "Gestionada por Databricks",
+  "bibliotecas": "Versiones reales por tarea; OCR y modelo instalados con %pip",
+  "autorizacion_docente": "PENDIENTE"
+}

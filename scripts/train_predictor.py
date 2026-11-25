@@ -12,7 +12,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from src.predictor import forecast,train_predictor,today_gt
+from src.predictor import forecast,train_predictor,today_gt,horizon_for_next_week
 from src.price_quality import quarantine_review_flags
 
 
@@ -20,6 +20,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source",choices=["fotos","mem"],required=True)
     parser.add_argument("--as-of",default=today_gt().isoformat())
+    parser.add_argument('--horizon-weeks',choices=['auto','1','2'],default='auto')
     args = parser.parse_args()
     if args.source == "mem":
         source = ROOT / "data/external/mem/precios_normalizados.csv"
@@ -43,7 +44,8 @@ if __name__ == "__main__":
         columns=["fecha","combustible","precio_q_galon","ubicacion","modalidad","foto_origen"]
         pd.DataFrame(rows)[columns].to_csv(ROOT/"output/precios_fotos_candidatos.csv",index=False)
         quality = "OCR_candidatos_pendiente_auditoria_humana"
-    model,report,tables = train_predictor(rows,as_of=args.as_of)
+    horizon=horizon_for_next_week(rows,args.as_of) if args.horizon_weeks=='auto' and args.source=='mem' else (1 if args.horizon_weeks=='auto' else int(args.horizon_weeks))
+    model,report,tables = train_predictor(rows,as_of=args.as_of,horizon_weeks=horizon)
     predictions,blocked = forecast(model,tables["features_modelo"],as_of=args.as_of)
     report.update(fuente=args.source,estado_calidad=quality,
                   sha256_entrada=hashlib.sha256(source.read_bytes()).hexdigest(),

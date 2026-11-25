@@ -30,12 +30,13 @@ def direction(change, threshold=0.10):
     return result.mask(values.isna())
 
 
-def build_tables(observations, threshold=0.10, as_of=None):
+def build_tables(observations, threshold=0.10, as_of=None, horizon_weeks=1):
     """Una fila por combustible/semana; nunca crea etiquetas a través de huecos.
 
     Oro representa la muestra de fotografías, no un promedio nacional. La cohorte
     de estaciones/modalidades debe validarse antes de interpretar variaciones.
     """
+    if horizon_weeks not in (1, 2):raise ValueError('Horizonte permitido: una o dos semanas')
     frame = pd.DataFrame(observations).copy()
     if frame.empty:
         raise ValueError("No hay observaciones de precio aceptadas")
@@ -82,12 +83,14 @@ def build_tables(observations, threshold=0.10, as_of=None):
     features["baseline"] = features.groupby("combustible")["direccion"].ffill()
     features["mes_sin"] = np.sin(2 * np.pi * features["semana"].dt.month / 12)
     features["mes_cos"] = np.cos(2 * np.pi * features["semana"].dt.month / 12)
-    future = weekly.loc[weekly["semana_cerrada"], ["semana", "combustible", "precio_promedio"]].copy()
-    future["semana"] -= pd.Timedelta(days=7)
-    future = future.rename(columns={"precio_promedio": "precio_siguiente"})
-    features = features.merge(future, on=["semana", "combustible"], how="left", validate="one_to_one")
-    features["semana_objetivo"] = features["semana"] + pd.Timedelta(days=7)
-    features["objetivo"] = direction(features["precio_siguiente"] - features["precio_promedio"], threshold)
+    # La etiqueta siempre es la dirección de la semana objetivo contra su semana
+    # anterior exacta. Con horizonte 2 no se compara el precio objetivo con el de
+    # hace dos semanas: eso sería otra variable distinta.
+    future = features.loc[features['semana_cerrada'], ['semana','combustible','precio_promedio','direccion']].copy()
+    future['semana'] -= pd.Timedelta(days=7*horizon_weeks)
+    future = future.rename(columns={'precio_promedio':'precio_siguiente','direccion':'objetivo'})
+    features = features.merge(future,on=['semana','combustible'],how='left',validate='one_to_one')
+    features['semana_objetivo'] = features['semana'] + pd.Timedelta(days=7*horizon_weeks)
     supervised = features.dropna(subset=["objetivo", "baseline"]).copy()
     # Las únicas columnas de entrada son FEATURES; precio_siguiente y objetivo nunca entran al modelo.
     return weekly, features, supervised
@@ -101,6 +104,13 @@ def temporal_partition(dataset):
     train_weeks, validation_weeks, test_weeks = weeks[:-2*holdout], weeks[-2*holdout:-holdout], weeks[-holdout:]
     pieces = [dataset[dataset["semana_objetivo"].isin(part)].copy()
               for part in (train_weeks, validation_weeks, test_weeks)]
+    # Purgar etiquetas que todavía no habrían cerrado al comenzar las features
+    # del bloque siguiente, especialmente importante para horizonte de dos semanas.
+    validation_limit = pieces[2]['semana'].min()
+    pieces[1] = pieces[1][pieces[1]['semana_objetivo'] + pd.Timedelta(days=7) <= validation_limit].copy()
+    if pieces[1].empty:raise ValueError('Validación insuficiente después de la purga temporal')
+    train_limit = pieces[1]['semana'].min()
+    pieces[0] = pieces[0][pieces[0]['semana_objetivo'] + pd.Timedelta(days=7) <= train_limit].copy()
     if len(pieces[0]) < 12 or pieces[0]["objetivo"].nunique() < 2:
         raise ValueError("Entrenamiento insuficiente: al menos 12 filas y dos clases")
     return pieces
@@ -126,8 +136,8 @@ def metrics(actual, predicted):
             "clases": CLASSES, "n": len(actual)}
 
 
-def train_predictor(observations, threshold=0.10, as_of=None):
-    weekly, features, data = build_tables(observations, threshold, as_of)
+def train_predictor(observations, threshold=0.10, as_of=None, horizon_weeks=1):
+    weekly, features, data = build_tables(observations, threshold, as_of, horizon_weeks)
     train, validation, test = temporal_partition(data)
     experiments, trained = {}, {}
     for kind in ("logistica", "arbol"):
@@ -140,7 +150,9 @@ def train_predictor(observations, threshold=0.10, as_of=None):
     evaluation_model = make_model(chosen).fit(development[FEATURES], development["objetivo"])
     predictions = evaluation_model.predict(test[FEATURES])
     report = {
-        "modelo": chosen, "umbral_q": threshold,
+        "modelo": chosen, "umbral_q": threshold, "horizonte_semanas": horizon_weeks,
+        "version_validacion": "temporal_purgada_v2",
+        "purga_temporal": "Etiquetas cerradas antes de la primera semana de features del bloque siguiente",
         "observaciones_semanales": len(weekly), "ejemplos_supervisados": len(data),
         "validacion_modelos": experiments,
         "modelo_test": metrics(test["objetivo"], predictions),
@@ -167,19 +179,55 @@ def train_predictor(observations, threshold=0.10, as_of=None):
     # El modelo para emitir pronósticos utiliza todos los resultados ya conocidos.
     production_model = make_model(chosen).fit(data[FEATURES], data["objetivo"])
     production_model.evaluation_model_ = evaluation_model
+    production_model.horizon_weeks_ = horizon_weeks
     report["modelo_produccion_reentrenado_con_historial_completo"] = True
     return production_model, report, {"precio_semanal": weekly, "features_modelo": features,
                                       "evaluacion_temporal": test}
+
+
+def historical_predictions(model, report, tables, generated_at):
+    """Reconstruye la prueba reservada con el modelo previo a ella, no el reajustado."""
+    if report['horizonte_semanas'] != 1:
+        raise ValueError('La demostración histórica exige horizonte de una semana')
+    test=tables['evaluacion_temporal']
+    trained_until=max(pd.Timestamp(report['particiones'][name]['hasta'])
+                      for name in ('entrenamiento','validacion'))+pd.Timedelta(days=6)
+    if not (trained_until < test['semana']).all():
+        raise ValueError('El modelo histórico conoce etiquetas posteriores al inicio de prueba')
+    evaluated=model.evaluation_model_
+    probabilities=evaluated.predict_proba(test[FEATURES])
+    predictions=evaluated.predict(test[FEATURES])
+    rows=[]
+    for row, label, scores in zip(test.itertuples(),predictions,probabilities):
+        target=pd.Timestamp(row.semana_objetivo)
+        if target-pd.Timestamp(row.semana)!=pd.Timedelta(days=7):
+            raise ValueError('La semana objetivo debe seguir exactamente a la semana de datos')
+        index=list(evaluated.classes_).index(label)
+        rows.append({'semana':target.date().isoformat(),'combustible':row.combustible,
+            'semana_datos':row.semana.date().isoformat(),
+            'fecha_corte_simulada':(target-pd.Timedelta(days=1)).date().isoformat(),
+            'entrenamiento_hasta':trained_until.date().isoformat(),
+            'generado_el':generated_at,'modo':'evaluacion_historica','horizonte_semanas':1,
+            'prediccion':str(label),'probabilidad':float(scores[index]),
+            'direccion_real':row.objetivo,'baseline':row.baseline,
+            'acierto':bool(label==row.objetivo),'baseline_acierto':bool(row.baseline==row.objetivo),
+            'precio_semana_base':float(row.precio_promedio),
+            'precio_semana_objetivo':float(row.precio_siguiente),
+            'variacion_real_q':float(round(row.precio_siguiente-row.precio_promedio,2))})
+    return rows
 
 
 def forecast(model, features, as_of=None):
     """Emite únicamente objetivos que todavía no han empezado; avisa ante historia atrasada."""
     cutoff = pd.Timestamp(as_of or today_gt()).normalize()
     latest = features.sort_values("semana").groupby("combustible").tail(1).copy()
-    available = latest[latest["semana_objetivo"] >= cutoff].copy()
+    horizon=int(getattr(model,"horizon_weeks_",1))
+    if not ((features["semana_objetivo"]-features["semana"]).dt.days == 7*horizon).all():
+        raise ValueError("Las features no corresponden al horizonte del modelo")
+    available = latest[latest["semana_objetivo"] > cutoff].copy()
     blocked = [{"combustible": row.combustible, "ultima_semana": row.semana.date().isoformat(),
                 "motivo": "FALTA_PRECIO_DE_LA_SEMANA_RECIENTE"}
-               for row in latest[latest["semana_objetivo"] < cutoff].itertuples()]
+               for row in latest[latest["semana_objetivo"] <= cutoff].itertuples()]
     result = []
     if not available.empty:
         probability = model.predict_proba(available[FEATURES])
@@ -191,5 +239,24 @@ def forecast(model, features, as_of=None):
                            "probabilidad": float(probabilities[i]), "direccion_real": None,
                            "fecha_emision": cutoff.date().isoformat(),
                            "semana_base_cerrada": bool(row.semana_cerrada),
-                           "observaciones_semana_base": int(row.observaciones)})
+                           "observaciones_semana_base": int(row.observaciones),
+                           "horizonte_semanas": int(getattr(model,"horizon_weeks_",1)),
+                           "antiguedad_datos_dias": int((cutoff-row.semana).days)})
     return result, blocked
+
+
+def horizon_for_next_week(observations,as_of=None):
+    """Usa horizonte 2 solo si los tres combustibles requieren el mismo rezago.
+
+    El calendario objetivo es el próximo martes. Si la historia es más antigua
+    conserva horizonte 1 para que forecast bloquee, sin extrapolar sin límite.
+    """
+    cutoff=pd.Timestamp(as_of or today_gt()).normalize()
+    target=cutoff+pd.Timedelta(days=(1-cutoff.weekday())%7 or 7)
+    frame=pd.DataFrame(observations)
+    if frame.empty:return 1
+    observed=pd.to_datetime(frame['fecha']).dt.normalize()
+    weeks=observed-pd.to_timedelta((observed.dt.weekday-1)%7,unit='D')
+    latest=frame.assign(semana=weeks).groupby('combustible')['semana'].max()
+    gaps=((target-latest).dt.days//7).tolist()
+    return 2 if len(gaps)==3 and all(g==2 for g in gaps) else 1

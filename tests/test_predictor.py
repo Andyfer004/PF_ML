@@ -2,7 +2,7 @@ import unittest
 
 import pandas as pd
 
-from src.predictor import FEATURES, build_tables, direction, forecast, temporal_partition, train_predictor
+from src.predictor import FEATURES, build_tables, direction, forecast, historical_predictions, temporal_partition, train_predictor
 
 
 def fixture(n=40):
@@ -18,6 +18,30 @@ def fixture(n=40):
 
 
 class PredictorTests(unittest.TestCase):
+    def test_historical_demo_uses_reserved_model_and_reproduces_test_metrics(self):
+        from unittest.mock import patch
+        model,report,tables=train_predictor(fixture(),as_of='2025-01-01')
+        with patch.object(model,'predict_proba',side_effect=AssertionError('No usar reajuste de producción')):
+            rows=historical_predictions(model,report,tables,'2026-11-24T19:00:00-06:00')
+        self.assertEqual(len(rows),report['modelo_test']['n'])
+        self.assertAlmostEqual(sum(r['acierto'] for r in rows)/len(rows),report['modelo_test']['accuracy'])
+        self.assertAlmostEqual(sum(r['baseline_acierto'] for r in rows)/len(rows),report['baseline_test']['accuracy'])
+        for row in rows:
+            self.assertLess(row['entrenamiento_hasta'],row['semana_datos'])
+            self.assertLess(row['fecha_corte_simulada'],row['semana'])
+            self.assertEqual((pd.Timestamp(row['semana'])-pd.Timestamp(row['semana_datos'])).days,7)
+            self.assertGreaterEqual(row['probabilidad'],0);self.assertLessEqual(row['probabilidad'],1)
+
+    def test_historical_demo_does_not_use_target_labels_to_predict(self):
+        model,report,tables=train_predictor(fixture(),as_of='2025-01-01')
+        before=historical_predictions(model,report,tables,'2026-11-24T19:00:00-06:00')
+        tables['evaluacion_temporal']=tables['evaluacion_temporal'].assign(objetivo='se_mantiene')
+        after=historical_predictions(model,report,tables,'2026-11-24T19:00:00-06:00')
+        self.assertEqual([(r['prediccion'],r['probabilidad']) for r in before],[(r['prediccion'],r['probabilidad']) for r in after])
+        report['particiones']['validacion']['hasta']='2026-11-24'
+        with self.assertRaisesRegex(ValueError,'posteriores'):
+            historical_predictions(model,report,tables,'2026-11-24T19:00:00-06:00')
+
     def test_gap_never_becomes_next_week_target(self):
         rows = [{"fecha": d, "combustible": "super", "precio_q_galon": p}
                 for d, p in (("2024-01-02", 30), ("2024-01-09", 31), ("2024-01-30", 40))]
@@ -63,10 +87,40 @@ class PredictorTests(unittest.TestCase):
         self.assertEqual(result, [])
         self.assertEqual(len(blocked), 3)
         last_target = tables["features_modelo"].semana_objetivo.max()
-        result, _ = forecast(model, tables["features_modelo"], as_of=last_target)
+        result, _ = forecast(model, tables["features_modelo"], as_of=last_target-pd.Timedelta(days=1))
         self.assertEqual(len(result), 3)
         self.assertTrue(all(0 <= x["probabilidad"] <= 1 for x in result))
 
 
 if __name__ == "__main__":
     unittest.main()
+
+class HorizonTests(unittest.TestCase):
+    def test_two_week_horizon_predicts_target_week_change_not_two_week_change(self):
+        # +10 y luego -5: el cambio acumulado es positivo, pero la semana objetivo baja.
+        rows=[{'fecha':d,'combustible':'super','precio_q_galon':v} for d,v in [('2024-01-02',30),('2024-01-09',40),('2024-01-16',35)]]
+        _,features,_=build_tables(rows,as_of='2024-02-01',horizon_weeks=2)
+        first=features[features.semana==pd.Timestamp('2024-01-02')].iloc[0]
+        self.assertEqual(first.semana_objetivo,pd.Timestamp('2024-01-16'))
+        self.assertEqual(first.objetivo,'baja')
+    def test_adaptive_horizon_is_bounded_and_requires_all_three_fuels(self):
+        from src.predictor import horizon_for_next_week
+        rows=[{'fecha':'2026-11-10','combustible':f} for f in ('super','regular','diesel')]
+        self.assertEqual(horizon_for_next_week(rows,'2026-11-20'),2)
+        self.assertEqual(horizon_for_next_week(rows,'2026-12-10'),1)
+        self.assertEqual(horizon_for_next_week(rows[:1],'2026-11-20'),1)
+
+    def test_current_tuesday_is_not_published_as_next_week(self):
+        model,report,tables=train_predictor(fixture(),as_of='2025-01-01')
+        target=tables['features_modelo'].semana_objetivo.max()
+        result,blocked=forecast(model,tables['features_modelo'],as_of=target)
+        self.assertEqual(result,[]);self.assertEqual(len(blocked),3)
+    def test_model_and_feature_horizons_must_match(self):
+        model,report,tables=train_predictor(fixture(),as_of='2025-01-01',horizon_weeks=2)
+        _,features,_=build_tables(fixture(),as_of='2025-01-01',horizon_weeks=1)
+        with self.assertRaisesRegex(ValueError,'horizonte'):forecast(model,features,as_of='2025-01-01')
+    def test_temporal_partitions_purge_labels_unavailable_at_next_fold_features(self):
+        _,_,data=build_tables(fixture(60),as_of='2026-11-20',horizon_weeks=2)
+        train,validation,test=temporal_partition(data)
+        self.assertLessEqual((train.semana_objetivo+pd.Timedelta(days=7)).max(),validation.semana.min())
+        self.assertLessEqual((validation.semana_objetivo+pd.Timedelta(days=7)).max(),test.semana.min())

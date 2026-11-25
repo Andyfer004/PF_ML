@@ -1,0 +1,160 @@
+{
+  "name": "equipo-03-pipeline",
+  "max_concurrent_runs": 1,
+  "timeout_seconds": 7200,
+  "queue": {
+    "enabled": true
+  },
+  "schedule": {
+    "quartz_cron_expression": "0 0 10 ? * TUE",
+    "timezone_id": "America/Guatemala",
+    "pause_status": "PAUSED"
+  },
+  "parameters": [
+    {
+      "name": "fecha_corte",
+      "default": ""
+    },
+    {
+      "name": "source_path",
+      "default": "s3://cc3105-raw-869227452861-us-east-2-an/img/"
+    },
+    {
+      "name": "fuente_modelo",
+      "default": "mem"
+    },
+    {
+      "name": "umbral_q",
+      "default": "0.10"
+    },
+    {
+      "name": "equipo",
+      "default": "03"
+    },
+    {
+      "name": "equipo_recursos",
+      "default": "05"
+    },
+    {
+      "name": "compute_mode",
+      "default": "serverless"
+    },
+    {
+      "name": "workspace_path",
+      "default": "/Workspace/Users/fue22944@uvg.edu.gt/PF-ML"
+    },
+    {
+      "name": "catalog",
+      "default": "lakehouse_equipo5"
+    },
+    {
+      "name": "source_root",
+      "default": "s3://cc3105-raw-869227452861-us-east-2-an/img/"
+    },
+    {
+      "name": "bronze_root",
+      "default": "s3://cc3105-cusn-869227452861-us-east-2-an/equipo-05/"
+    },
+    {
+      "name": "silver_root",
+      "default": "s3://cc3105-ag-869227452861-us-east-2-an/equipo-05/"
+    },
+    {
+      "name": "gold_root",
+      "default": "s3://cc3105-au-869227452861-us-east-2-an/equipo-05/"
+    },
+    {
+      "name": "api_root",
+      "default": "s3://cc3105-au-869227452861-us-east-2-an/cc3105-equipo5/api/"
+    },
+    {
+      "name": "max_photos",
+      "default": "500"
+    }
+  ],
+  "tasks": [
+    {
+      "task_key": "bronze",
+      "timeout_seconds": 1800,
+      "notebook_task": {
+        "notebook_path": "/Users/fue22944@uvg.edu.gt/PF-ML/01_bronze",
+        "base_parameters": {
+          "source_path": "{{job.parameters.source_path}}",
+          "dry_run": "false",
+          "destination_path": "{{job.parameters.bronze_root}}fotos_precios/",
+          "equipo": "{{job.parameters.equipo}}",
+          "equipo_recursos": "{{job.parameters.equipo_recursos}}",
+          "compute_mode": "{{job.parameters.compute_mode}}",
+          "workspace_path": "{{job.parameters.workspace_path}}",
+          "catalog": "{{job.parameters.catalog}}"
+        }
+      },
+      "max_retries": 0
+    },
+    {
+      "task_key": "silver",
+      "depends_on": [
+        {
+          "task_key": "bronze"
+        }
+      ],
+      "timeout_seconds": 5400,
+      "notebook_task": {
+        "notebook_path": "/Users/fue22944@uvg.edu.gt/PF-ML/02_silver",
+        "base_parameters": {
+          "fecha_corte": "{{job.parameters.fecha_corte}}",
+          "equipo": "{{job.parameters.equipo}}",
+          "equipo_recursos": "{{job.parameters.equipo_recursos}}",
+          "compute_mode": "{{job.parameters.compute_mode}}",
+          "workspace_path": "{{job.parameters.workspace_path}}",
+          "catalog": "{{job.parameters.catalog}}",
+          "source_path": "{{job.parameters.source_path}}",
+          "source_root": "{{job.parameters.source_root}}",
+          "bronze_root": "{{job.parameters.bronze_root}}",
+          "silver_root": "{{job.parameters.silver_root}}",
+          "gold_root": "{{job.parameters.gold_root}}",
+          "api_root": "{{job.parameters.api_root}}",
+          "max_photos": "{{job.parameters.max_photos}}"
+        }
+      },
+      "max_retries": 0
+    },
+    {
+      "task_key": "gold",
+      "depends_on": [
+        {
+          "task_key": "silver"
+        }
+      ],
+      "timeout_seconds": 1800,
+      "notebook_task": {
+        "notebook_path": "/Users/fue22944@uvg.edu.gt/PF-ML/03_gold",
+        "base_parameters": {
+          "fecha_corte": "{{job.parameters.fecha_corte}}",
+          "fuente_modelo": "{{job.parameters.fuente_modelo}}",
+          "umbral_q": "{{job.parameters.umbral_q}}",
+          "equipo": "{{job.parameters.equipo}}",
+          "equipo_recursos": "{{job.parameters.equipo_recursos}}",
+          "compute_mode": "{{job.parameters.compute_mode}}",
+          "workspace_path": "{{job.parameters.workspace_path}}",
+          "catalog": "{{job.parameters.catalog}}",
+          "source_path": "{{job.parameters.source_path}}",
+          "source_root": "{{job.parameters.source_root}}",
+          "bronze_root": "{{job.parameters.bronze_root}}",
+          "silver_root": "{{job.parameters.silver_root}}",
+          "gold_root": "{{job.parameters.gold_root}}",
+          "api_root": "{{job.parameters.api_root}}",
+          "max_photos": "{{job.parameters.max_photos}}"
+        }
+      },
+      "max_retries": 0
+    }
+  ],
+  "email_notifications": {
+    "on_failure": [
+      "fue22944@uvg.edu.gt"
+    ],
+    "on_start": [],
+    "on_success": []
+  }
+}
