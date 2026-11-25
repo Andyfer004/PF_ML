@@ -1,0 +1,47 @@
+{
+  "job_id": 164482682079093,
+  "descripcion": "Capturas originales guardadas por el equipo, sin modificar. Las duraciones visibles de UI y execution_duration de la API son métricas distintas.",
+  "capturas": [
+    {
+      "archivo": "historial_job.png",
+      "sha256": "ffdf603a7f6726e9eb01d010302d20fcda4858d7eeb6abb13b5eb6ab06a480ed",
+      "run_id": null
+    },
+    {
+      "archivo": "ejecucion_128298002079637.png",
+      "sha256": "f8eca82214f7fc12b5c7498d0d80f69f40f5533efd9904359d42b53a484115bc",
+      "run_id": 128298002079637,
+      "semana_foto": "2026-01-27",
+      "foto": "IMG_7665.HEIC",
+      "resultado": "SUCCESS",
+      "duracion_ejecucion_api_segundos": {
+        "bronze": 41.0,
+        "silver": 76.0,
+        "gold": 165.0
+      },
+      "duracion_mostrada_ui_segundos": {
+        "bronze": 44,
+        "silver": 78,
+        "gold": 167
+      }
+    },
+    {
+      "archivo": "ejecucion_592769852166445.png",
+      "sha256": "b12fb7b5c16c38d29f965ad11c064afbbac4bed47e8df72a4b3513d75b8cb132",
+      "run_id": 592769852166445,
+      "semana_foto": "2026-07-07",
+      "foto": "IMG_8271.HEIC",
+      "resultado": "SUCCESS",
+      "duracion_ejecucion_api_segundos": {
+        "bronze": 17.0,
+        "silver": 65.0,
+        "gold": 147.0
+      },
+      "duracion_mostrada_ui_segundos": {
+        "bronze": 20,
+        "silver": 66,
+        "gold": 148
+      }
+    }
+  ]
+}

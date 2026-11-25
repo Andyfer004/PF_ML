@@ -1,0 +1,12 @@
+digraph flujo {
+ graph [rankdir=LR,bgcolor="white",pad="0.2",nodesep="0.4",ranksep="0.45"];
+ node [shape=box,style="rounded,filled",fillcolor="#eef3f6",color="#214565",fontname="Helvetica",fontsize=24,margin="0.18,0.16"];
+ edge [color="#087f8c",penwidth=2,fontname="Helvetica",fontsize=17];
+ origen [label="Fotos\n+ MEM"];
+ bronze [label="Bronce\nOriginales"];
+ silver [label="Plata\nPrecios y calidad"];
+ gold [label="Oro\nIndicadores\ny modelo"];
+ api [label="API\nSolo lectura"];
+ origen -> bronze -> silver -> gold;
+ gold -> api [label="S3\nverificado"];
+}

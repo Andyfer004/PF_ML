@@ -1,0 +1,15 @@
+{
+  "fecha": "2026-11-23T22:03:46.445677-06:00",
+  "job_id": 164482682079093,
+  "run_id": 145565275696322,
+  "destinatario": "fue22944@uvg.edu.gt",
+  "fallo_controlado_verificado": true,
+  "error_controlado": "RuntimeError: PRUEBA_CONTROLADA_ALERTA_FALLO: fallo deliberado autorizado; sin escrituras de datos.",
+  "tareas_pipeline_ejecutadas": [],
+  "configuracion_restaurada": true,
+  "notebook_temporal_eliminado": true,
+  "recepcion_correo_confirmada": true,
+  "fuente": "Databricks Jobs API y captura del correo recibida del usuario",
+  "confirmacion_recepcion_fecha": "2026-11-23T22:17:16.894503-06:00",
+  "confirmacion_recepcion_fuente": "Captura del correo compartida por el usuario: Job equipo-03-pipeline, run 145565275696322, tarea prueba_controlada_alerta, estado Failed, duracion 36 segundos."
+}

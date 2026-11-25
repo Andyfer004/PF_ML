@@ -1,0 +1,52 @@
+[
+  {
+    "slide": 1,
+    "title": "",
+    "notes": "0:00–0:40. Presentar al equipo 5. Pregunta central: si el precio de súper, regular o diésel subirá o bajará la siguiente semana. Explicar que construimos un flujo completo y que mostraremos sus resultados y sus límites. Todos los integrantes deben participar. Fuente: enunciado CC3105, presentación ante jurado, páginas 9–10."
+  },
+  {
+    "slide": 2,
+    "title": "El precio cambia. La información queda en fotos.",
+    "notes": "0:40–1:50. Para conductores y pequeños negocios, conocer la dirección del precio ayuda a planificar compras. No prometemos un ahorro medido. El reto inicial es convertir imágenes heterogéneas en observaciones trazables. Se complementan 110 fotos con 11,427 registros MEM limpios, pero las fuentes no se mezclan como si fueran la misma población. Foto real IMG_2976.HEIC, material del profesor autorizado para validar OCR. Fuente: output/evaluacion_ocr_humana.json; docs/informe.pdf."
+  },
+  {
+    "slide": 3,
+    "title": "Arquitectura de la plataforma",
+    "notes": "1:50–2:50. Presentar el diagrama elegido por el equipo. Explicar el recorrido de fotografías y MEM por Bronce, Plata y Oro hasta la publicación Parquet y la API. La imagen es el archivo proporcionado por el equipo, conservado sin modificaciones. Aclaración técnica: la cuenta SSH operativa sigue siendo cc3105-03 y el Job desplegado conserva equipo-03-pipeline; sus nombres no cambian al usar la imagen. Fuente: docs/arquitectura_usuario.png; pipelines/job_exportado.json; api/compose.yaml."
+  },
+  {
+    "slide": 4,
+    "title": "OCR: precisión y cobertura",
+    "notes": "2:50–4:00. Revisamos 20 fotos. Trece contienen referencias legibles: 33 precios. El OCR extrajo 18, de los cuales 17 fueron correctos con tolerancia Q0.02. Precisión 17/18=94.4%; cobertura 18/33=54.5%; exactitud incluyendo omisiones 17/33=51.5%. Otros 27 campos ilegibles no se convierten en etiquetas. Las cifras describen el OCR antes de la curación. Fuente: output/evaluacion_ocr_humana.json."
+  },
+  {
+    "slide": 5,
+    "title": "Los controles deciden qué entra al modelo",
+    "notes": "4:00–4:45. Silver publica 126 filas aceptadas y 278 rechazadas. Son registros, no fotografías. Revisar combustible permitido, rango Q10–Q80, fecha válida/no futura y consistencia. Rechazos conservan motivo y fotografía. MERGE usa fecha+ubicación+combustible+modalidad y evita duplicados. Una segunda ejecución mantuvo el mismo contenido. Las lecturas dudosas y la discrepancia conocida no alimentan el entrenamiento. Fuente: output/verificacion_plata_metadatos.json; output/ejecuciones/911708285654289.json; src/silver.py."
+  },
+  {
+    "slide": 6,
+    "title": "La predicción usa semanas anteriores",
+    "notes": "4:45–5:45. Semanas martes a lunes y horizonte fijo de una semana. Dirección sube con cambio mayor a Q0.10, baja menor a -Q0.10, se mantiene en el intervalo inclusivo. Variables: combustible, precio promedio, cambio semanal exacto, cambio desde última observación, separación entre observaciones y seno/coseno del mes. Se comparan regresión logística y árbol. El modelo elegido es el árbol. Separación cronológica con purga de etiquetas y transformaciones ajustadas solo en entrenamiento. Fuente: src/predictor.py; métricas reales de Oro en output/api_oro_real."
+  },
+  {
+    "slide": 7,
+    "title": "Una mejora pequeña en exactitud",
+    "notes": "5:45–6:45. Prueba temporal MEM con 417 casos. Exactitud del árbol 58.7529976% frente a 57.07434% de la línea base que repite la dirección anterior: +1.68 puntos porcentuales. Macro F1 modelo 0.5416475 frente a 0.5577695: no supera al baseline en esta métrica. No afirmamos mejora general ni garantía futura. Fotos: solo cinco casos, exactitud .6 modelo y .6 baseline. Fuente: métricas reales de gold.metricas_modelo y docs/informe.pdf."
+  },
+  {
+    "slide": 8,
+    "title": "Un Job ejecuta el flujo completo",
+    "notes": "6:45–7:40. El Job encadena Bronce, Plata y Oro. Martes 10:00 Guatemala, parámetros y aviso de fallos probado por correo. Serverless es el cómputo usado. Dos ejecuciones sin reparación verifican fotos de semanas distintas: run 128298002079637 con foto del 28 enero, semana 27 enero, y run 592769852166445 foto del 9 julio, semana 7 julio. Ambas releyeron una foto existente: no afirmar ingesta nueva en esas pruebas. La demo exige ejecutar con fotos nuevas si el profesor proporciona nuevas. Fuente: output/verificacion_fase4.json."
+  },
+  {
+    "slide": 9,
+    "title": "Demo pública",
+    "notes": "7:40–8:20 y luego demo de 5 minutos. Abrir el QR en teléfono o navegador. 1. Precios actuales e histórico en UI. 2. Seleccionar fuente MEM, combustible y semana. 3. Consultar /prediccion?combustible=super en Swagger. 4. Mostrar métricas. 5. En Databricks, Run now con fotos nuevas si están disponibles y revisar las tres tareas. El Job existente es https://dbc-5490c6a5-5215.cloud.databricks.com/jobs/164482682079093?o=7474655525361249. La API usa modo histórico por defecto. Fuente: respuesta HTTP real guardada en tmp/presentacion_editorial/prediccion.json, consulta 25 noviembre 2026. QR contiene solo http://165.22.137.8:8000/."
+  },
+  {
+    "slide": 10,
+    "title": "Una predicción que podemos verificar",
+    "notes": "8:20–10:00. Ejemplo histórico de súper para la semana 10 noviembre 2026, datos base 3 noviembre y corte simulado 9 noviembre. Predicción baja, probabilidad 84.8855%, real baja. Es un caso ilustrativo y no reemplaza los 417 casos del test. No es el pronóstico de la próxima semana actual. Cierre: la revisión humana reveló el límite de cobertura; la validación temporal evitó usar etiquetas futuras. Más datos recientes permiten avanzar a pronósticos vigentes. Abrir la demo de 5 minutos después de cerrar la exposición, luego 5 de preguntas. Fuentes: respuesta pública /prediccion?combustible=super; output/evaluacion_ocr_humana.json."
+  }
+]

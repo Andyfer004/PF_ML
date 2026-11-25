@@ -1,0 +1,1385 @@
+{
+  "fecha": "2026-11-25T01:42:38.695619-06:00",
+  "fuente": "Databricks Jobs API y HTTP por SSH al Droplet; no son capturas de UI",
+  "ejecuciones": [
+    {
+      "run_id": 592769852166445,
+      "tareas": [
+        {
+          "task_key": "bronze",
+          "run_id": 431451140299728,
+          "execution_duration": 17000,
+          "setup_duration": 3000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "silver",
+          "run_id": 195922762965293,
+          "execution_duration": 65000,
+          "setup_duration": 1000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "gold",
+          "run_id": 980643278974133,
+          "execution_duration": 147000,
+          "setup_duration": 1000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 337936250610363,
+      "tareas": [
+        {
+          "task_key": "bronze",
+          "run_id": 102580111605736,
+          "execution_duration": 17000,
+          "setup_duration": 3000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "silver",
+          "run_id": 794877818912029,
+          "execution_duration": 56000,
+          "setup_duration": 1000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "gold",
+          "run_id": 843142829616808,
+          "execution_duration": 142000,
+          "setup_duration": 1000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 367101410964731,
+      "tareas": [
+        {
+          "task_key": "bronze",
+          "run_id": 1109752631524093,
+          "execution_duration": 44000,
+          "setup_duration": 3000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "silver",
+          "run_id": 88925354197721,
+          "execution_duration": 69000,
+          "setup_duration": 2000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "gold",
+          "run_id": 739539145782238,
+          "execution_duration": 138000,
+          "setup_duration": 2000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 857541686494746,
+      "tareas": [
+        {
+          "task_key": "bronze",
+          "run_id": 26045017232410,
+          "execution_duration": 48000,
+          "setup_duration": 3000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "silver",
+          "run_id": 139672600604638,
+          "execution_duration": 663000,
+          "setup_duration": 2000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "gold",
+          "run_id": 768256438279554,
+          "execution_duration": 143000,
+          "setup_duration": 2000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 87608323636901,
+      "tareas": [
+        {
+          "task_key": "bronze",
+          "run_id": 706251272455026,
+          "execution_duration": 44000,
+          "setup_duration": 3000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "silver",
+          "run_id": 1070888959872362,
+          "execution_duration": 75000,
+          "setup_duration": 1000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "gold",
+          "run_id": 706543840554043,
+          "execution_duration": 155000,
+          "setup_duration": 2000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 128298002079637,
+      "tareas": [
+        {
+          "task_key": "bronze",
+          "run_id": 629364514608913,
+          "execution_duration": 41000,
+          "setup_duration": 3000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "silver",
+          "run_id": 920057921821815,
+          "execution_duration": 76000,
+          "setup_duration": 2000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "gold",
+          "run_id": 676637590662499,
+          "execution_duration": 165000,
+          "setup_duration": 2000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 911708285654289,
+      "tareas": [
+        {
+          "task_key": "bronze",
+          "run_id": 761066273147247,
+          "execution_duration": 20000,
+          "setup_duration": 2000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "silver",
+          "run_id": 606254468694276,
+          "execution_duration": 64000,
+          "setup_duration": 1000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "gold",
+          "run_id": 464058908228744,
+          "execution_duration": 133000,
+          "setup_duration": 1000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 898631911854042,
+      "tareas": [
+        {
+          "task_key": "bronze",
+          "run_id": 1058026659822989,
+          "execution_duration": 29000,
+          "setup_duration": 3000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "silver",
+          "run_id": 261609250148101,
+          "execution_duration": 67000,
+          "setup_duration": 2000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "gold",
+          "run_id": 1066544403946681,
+          "execution_duration": 131000,
+          "setup_duration": 2000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 244808610075482,
+      "tareas": [
+        {
+          "task_key": "gold",
+          "run_id": 542177998971712,
+          "execution_duration": 122000,
+          "setup_duration": 3000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "gold",
+          "run_id": 738195526227391,
+          "execution_duration": 61000,
+          "setup_duration": 3000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "CANCELED",
+            "state_message": "Run cancelled by user",
+            "user_cancelled_or_timedout": true
+          }
+        },
+        {
+          "task_key": "bronze",
+          "run_id": 18348345770523,
+          "execution_duration": 21000,
+          "setup_duration": 3000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "silver",
+          "run_id": 112314201163531,
+          "execution_duration": 53000,
+          "setup_duration": 2000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "gold",
+          "run_id": 1075158524699341,
+          "execution_duration": 115000,
+          "setup_duration": 2000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "FAILED",
+            "state_message": "Workload failed, see run output for details",
+            "user_cancelled_or_timedout": false
+          }
+        }
+      ]
+    },
+    {
+      "run_id": 782108061529570,
+      "tareas": [
+        {
+          "task_key": "bronze",
+          "run_id": 600212863711976,
+          "execution_duration": 20000,
+          "setup_duration": 3000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "silver",
+          "run_id": 1009684508568638,
+          "execution_duration": 63000,
+          "setup_duration": 2000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        },
+        {
+          "task_key": "gold",
+          "run_id": 458457171353715,
+          "execution_duration": 126000,
+          "setup_duration": 1000,
+          "state": {
+            "life_cycle_state": "TERMINATED",
+            "result_state": "SUCCESS",
+            "state_message": "",
+            "user_cancelled_or_timedout": false
+          }
+        }
+      ]
+    }
+  ],
+  "api": {
+    "/docs": {
+      "http": 200
+    },
+    "/health": {
+      "http": 200
+    },
+    "/precios/actual": {
+      "http": 200
+    },
+    "/precios?combustible=diesel&desde=2026-10-01&hasta=2026-11-30&limit=2": {
+      "http": 200
+    },
+    "/modelo/metricas": {
+      "http": 200
+    },
+    "/prediccion?combustible=super": {
+      "http": 200
+    },
+    "/prediccion?combustible=regular": {
+      "http": 200
+    },
+    "/prediccion?combustible=diesel": {
+      "http": 200
+    },
+    "/prediccion?combustible=super&modo=vigente": {
+      "http": 503
+    },
+    "/prediccion?combustible=regular&modo=vigente": {
+      "http": 503
+    },
+    "/prediccion?combustible=diesel&modo=vigente": {
+      "http": 503
+    },
+    "/prediccion/historica/semanas?fuente=mem": {
+      "http": 200
+    },
+    "/prediccion/historica?combustible=super&fuente=mem": {
+      "http": 200
+    },
+    "/prediccion/historica?combustible=regular&fuente=mem": {
+      "http": 200
+    },
+    "/prediccion/historica?combustible=diesel&fuente=mem": {
+      "http": 200
+    },
+    "/": {
+      "http": 200
+    },
+    "/ui-assets/styles.css": {
+      "http": 200
+    },
+    "/ui-assets/app.js": {
+      "http": 200
+    },
+    "/ui-assets/favicon.svg": {
+      "http": 200
+    },
+    "/proyecto/resumen": {
+      "http": 200
+    },
+    "/entregables/informe": {
+      "http": 200
+    },
+    "/entregables/presentacion": {
+      "http": 200
+    },
+    "/entregables/resumen": {
+      "http": 200
+    },
+    "/entregables/arquitectura": {
+      "http": 200
+    }
+  },
+  "publicacion_oro": {
+    "status": "ok",
+    "release": "9fca51e2e2f149e2a1b8bf69048e9366",
+    "fecha_corte": "2026-11-24",
+    "fuente_default": "mem",
+    "origen": "S3_ORO",
+    "validacion_ocr": "MUESTRA_HUMANA_20_FOTOS_COMPLETA"
+  },
+  "pendientes": [
+    "Computo: el workspace acepta solo serverless; queda pendiente la conformidad docente frente al requisito de clusters clasicos.",
+    "Equipo: incorporar aportes reales de los demas integrantes; no se inventan autorias.",
+    "Presentacion: conservar un respaldo para la demo; las tres capturas del Job ya estan en docs/evidencias/fase4/.",
+    "Presentacion: entregar el resumen con la URL publica 48 horas antes."
+  ],
+  "prueba_alerta_fallo": {
+    "fecha": "2026-11-23T22:03:46.445677-06:00",
+    "job_id": 164482682079093,
+    "run_id": 145565275696322,
+    "destinatario": "fue22944@uvg.edu.gt",
+    "fallo_controlado_verificado": true,
+    "error_controlado": "RuntimeError: PRUEBA_CONTROLADA_ALERTA_FALLO: fallo deliberado autorizado; sin escrituras de datos.",
+    "tareas_pipeline_ejecutadas": [],
+    "configuracion_restaurada": true,
+    "notebook_temporal_eliminado": true,
+    "recepcion_correo_confirmada": true,
+    "fuente": "Databricks Jobs API y captura del correo recibida del usuario",
+    "confirmacion_recepcion_fecha": "2026-11-23T22:17:16.894503-06:00",
+    "confirmacion_recepcion_fuente": "Captura del correo compartida por el usuario: Job equipo-03-pipeline, run 145565275696322, tarea prueba_controlada_alerta, estado Failed, duracion 36 segundos."
+  },
+  "validacion_plata": {
+    "primera_ejecucion": 857541686494746,
+    "segunda_ejecucion": 911708285654289,
+    "firma_codigo": "54883a530f78fd8ac743a2b43f09d330cb8a4078b26bbeb303162d6e2cf1bba7",
+    "tablas_identicas": true,
+    "resumen_identico": true,
+    "resumen": {
+      "fotos_procesadas": 110,
+      "fotos_con_precios_aceptados": 63,
+      "fotos_sin_precios_aceptados": 47,
+      "fotos_con_algun_rechazo": 104,
+      "fotos_con_aceptados_y_rechazados": 57,
+      "registros_aceptados": 126,
+      "registros_rechazados": 278,
+      "rechazos_por_motivo": [
+        {
+          "motivo_rechazo": "PRECIO_AUSENTE_O_FUERA_RANGO|SIN_CONSENSO",
+          "registros": 69,
+          "fotos": 42
+        },
+        {
+          "motivo_rechazo": "LECTURAS_INSUFICIENTES|PRECIO_AUSENTE_O_FUERA_RANGO",
+          "registros": 61,
+          "fotos": 26
+        },
+        {
+          "motivo_rechazo": "COMBUSTIBLE_FUERA_CATALOGO",
+          "registros": 41,
+          "fotos": 41
+        },
+        {
+          "motivo_rechazo": "PRECIO_AUSENTE_O_FUERA_RANGO|TRANSACCION_NO_COINCIDE_CON_LCD",
+          "registros": 21,
+          "fotos": 9
+        },
+        {
+          "motivo_rechazo": "COMBUSTIBLE_NO_IDENTIFICADO|PRECIO_AUSENTE_O_FUERA_RANGO",
+          "registros": 19,
+          "fotos": 11
+        },
+        {
+          "motivo_rechazo": "COMBUSTIBLE_FUERA_CATALOGO|PRECIO_AUSENTE_O_FUERA_RANGO|SIN_CONSENSO",
+          "registros": 12,
+          "fotos": 12
+        },
+        {
+          "motivo_rechazo": "COMBUSTIBLE_FUERA_CATALOGO|PRECIO_AUSENTE_O_FUERA_RANGO|TRANSACCION_NO_COINCIDE_CON_LCD",
+          "registros": 11,
+          "fotos": 11
+        },
+        {
+          "motivo_rechazo": "LECTURAS_INSUFICIENTES|PRECIO_AUSENTE_O_FUERA_RANGO|REVISION_HUMANA_ILEGIBLE",
+          "registros": 11,
+          "fotos": 4
+        },
+        {
+          "motivo_rechazo": "COMBUSTIBLE_FUERA_CATALOGO|COMBUSTIBLE_NO_IDENTIFICADO|PRECIO_AUSENTE_O_FUERA_RANGO",
+          "registros": 10,
+          "fotos": 10
+        },
+        {
+          "motivo_rechazo": "PRECIO_AUSENTE_O_FUERA_RANGO|REVISION_HUMANA_ILEGIBLE|SIN_CONSENSO",
+          "registros": 9,
+          "fotos": 5
+        },
+        {
+          "motivo_rechazo": "PRECIO_AUSENTE_O_FUERA_RANGO|REVISION_HUMANA_ILEGIBLE|TRANSACCION_NO_COINCIDE_CON_LCD",
+          "registros": 3,
+          "fotos": 2
+        },
+        {
+          "motivo_rechazo": "LECTURA_1_7_PENDIENTE_CONFIRMACION|PRECIO_AUSENTE_O_FUERA_RANGO",
+          "registros": 2,
+          "fotos": 2
+        },
+        {
+          "motivo_rechazo": "PRECIO_AUSENTE_O_FUERA_RANGO|VISTAS_DISCREPAN",
+          "registros": 2,
+          "fotos": 2
+        },
+        {
+          "motivo_rechazo": "REVISION_HUMANA_ILEGIBLE",
+          "registros": 2,
+          "fotos": 2
+        },
+        {
+          "motivo_rechazo": "COMBUSTIBLE_NO_IDENTIFICADO|PRECIO_AUSENTE_O_FUERA_RANGO|REVISION_HUMANA_ILEGIBLE",
+          "registros": 1,
+          "fotos": 1
+        },
+        {
+          "motivo_rechazo": "DISCREPA_REFERENCIA_HUMANA",
+          "registros": 1,
+          "fotos": 1
+        },
+        {
+          "motivo_rechazo": "LECTURA_1_7_PENDIENTE_CONFIRMACION|PRECIO_AUSENTE_O_FUERA_RANGO|REVISION_HUMANA_ILEGIBLE",
+          "registros": 1,
+          "fotos": 1
+        },
+        {
+          "motivo_rechazo": "PRECIO_AUSENTE_O_FUERA_RANGO|PRECIO_FUERA_RANGO",
+          "registros": 1,
+          "fotos": 1
+        },
+        {
+          "motivo_rechazo": "PRECIO_AUSENTE_O_FUERA_RANGO|PRECIO_FUERA_RANGO|VISTAS_DISCREPAN",
+          "registros": 1,
+          "fotos": 1
+        }
+      ]
+    }
+  },
+  "evaluacion_historica": {
+    "run_id": 87608323636901,
+    "release": "41cf83b4b26d4236b0cd5128c5aa4906",
+    "origen": "S3_ORO",
+    "endpoints_http": {
+      "/docs": 200,
+      "/health": 200,
+      "/precios/actual": 200,
+      "/precios?combustible=diesel&desde=2026-10-01&hasta=2026-11-30&limit=2": 200,
+      "/modelo/metricas": 200,
+      "/prediccion?combustible=super": 503,
+      "/prediccion?combustible=regular": 503,
+      "/prediccion?combustible=diesel": 503,
+      "/prediccion/historica/semanas?fuente=mem": 200,
+      "/prediccion/historica?combustible=super&fuente=mem": 200,
+      "/prediccion/historica?combustible=regular&fuente=mem": 200,
+      "/prediccion/historica?combustible=diesel&fuente=mem": 200,
+      "/": 200,
+      "/ui-assets/styles.css": 200,
+      "/ui-assets/app.js": 200,
+      "/ui-assets/favicon.svg": 200,
+      "/proyecto/resumen": 200,
+      "/entregables/informe": 200,
+      "/entregables/presentacion": 200,
+      "/entregables/resumen": 200,
+      "/entregables/arquitectura": 200
+    },
+    "ejemplos_mem": [
+      {
+        "semana": "2026-11-10",
+        "combustible": "super",
+        "semana_datos": "2026-11-03",
+        "fecha_corte_simulada": "2026-11-09",
+        "entrenamiento_hasta": "2024-03-11",
+        "generado_el": "2026-11-24T19:43:49.086713-06:00",
+        "modo": "evaluacion_historica",
+        "horizonte_semanas": 1,
+        "prediccion": "baja",
+        "probabilidad": 0.8488553268,
+        "direccion_real": "baja",
+        "baseline": "baja",
+        "acierto": true,
+        "baseline_acierto": true,
+        "precio_semana_base": 33.2528571429,
+        "precio_semana_objetivo": 32.49,
+        "variacion_real_q": -0.76,
+        "fuente": "mem",
+        "mlflow_run_id": "eaa95775134f4f5db6de820c72fa6de6",
+        "es_pronostico_vigente": false
+      },
+      {
+        "semana": "2026-11-10",
+        "combustible": "regular",
+        "semana_datos": "2026-11-03",
+        "fecha_corte_simulada": "2026-11-09",
+        "entrenamiento_hasta": "2024-03-11",
+        "generado_el": "2026-11-24T19:43:49.086713-06:00",
+        "modo": "evaluacion_historica",
+        "horizonte_semanas": 1,
+        "prediccion": "baja",
+        "probabilidad": 0.8488553268,
+        "direccion_real": "baja",
+        "baseline": "baja",
+        "acierto": true,
+        "baseline_acierto": true,
+        "precio_semana_base": 30.7171428571,
+        "precio_semana_objetivo": 29.98,
+        "variacion_real_q": -0.74,
+        "fuente": "mem",
+        "mlflow_run_id": "eaa95775134f4f5db6de820c72fa6de6",
+        "es_pronostico_vigente": false
+      },
+      {
+        "semana": "2026-11-10",
+        "combustible": "diesel",
+        "semana_datos": "2026-11-03",
+        "fecha_corte_simulada": "2026-11-09",
+        "entrenamiento_hasta": "2024-03-11",
+        "generado_el": "2026-11-24T19:43:49.086713-06:00",
+        "modo": "evaluacion_historica",
+        "horizonte_semanas": 1,
+        "prediccion": "baja",
+        "probabilidad": 0.8488553268,
+        "direccion_real": "baja",
+        "baseline": "baja",
+        "acierto": true,
+        "baseline_acierto": true,
+        "precio_semana_base": 41.7557142857,
+        "precio_semana_objetivo": 41.01,
+        "variacion_real_q": -0.75,
+        "fuente": "mem",
+        "mlflow_run_id": "eaa95775134f4f5db6de820c72fa6de6",
+        "es_pronostico_vigente": false
+      }
+    ],
+    "solo_loopback": true,
+    "revision_visual_ui": "BLOQUEADA_POR_CONEXION_DEL_NAVEGADOR",
+    "pruebas_python": 62,
+    "pruebas_dom": 10
+  },
+  "orquestacion_fase4": {
+    "job_id": 164482682079093,
+    "equipo": "03",
+    "equipo_recursos": "05",
+    "ejecuciones": [
+      {
+        "run_id": 128298002079637,
+        "foto": "IMG_7665.HEIC",
+        "foto_origen": "s3://cc3105-raw-869227452861-us-east-2-an/img/IMG_7665.HEIC",
+        "fecha_exif": "2026-01-28",
+        "semana_foto": "2026-01-27",
+        "sha256_imagen": "b8904d01aab1ef82b3e102f6782be4d34dea4c26da24bd6afe512350f6e0620e",
+        "fotos_leidas_bronce": 1,
+        "filas_bronce": 110,
+        "fotos_nuevas": 0,
+        "resultado": "SUCCESS",
+        "duraciones_segundos": {
+          "bronze": 41.0,
+          "silver": 76.0,
+          "gold": 165.0
+        },
+        "computo": {
+          "bronze": {
+            "modo_configurado": "serverless",
+            "python": "3.12.3",
+            "spark": "4.2.0",
+            "librerias_instaladas": {
+              "scikit-learn": "1.7.2",
+              "pandas": "2.3.3",
+              "scipy": "1.16.3",
+              "mlflow-skinny": "3.12.0"
+            },
+            "infraestructura": "Runtime, nodos, workers y terminación gestionados por Databricks; no equivalen a un cluster clásico configurable",
+            "autorizacion_docente_serverless": "PENDIENTE"
+          },
+          "silver": {
+            "modo_configurado": "serverless",
+            "python": "3.12.3",
+            "spark": "4.2.0",
+            "librerias_instaladas": {
+              "pillow-heif": "1.1.1",
+              "rapidocr-onnxruntime": "1.4.4",
+              "opencv-python": "4.11.0.86",
+              "openpyxl": "3.1.5",
+              "scikit-learn": "1.7.2",
+              "pandas": "2.3.3",
+              "scipy": "1.16.3",
+              "mlflow-skinny": "3.12.0"
+            },
+            "infraestructura": "Runtime, nodos, workers y terminación gestionados por Databricks; no equivalen a un cluster clásico configurable",
+            "autorizacion_docente_serverless": "PENDIENTE"
+          },
+          "gold": {
+            "modo_configurado": "serverless",
+            "python": "3.12.3",
+            "spark": "4.2.0",
+            "librerias_instaladas": {
+              "scikit-learn": "1.6.1",
+              "pandas": "2.3.3",
+              "scipy": "1.15.3",
+              "mlflow-skinny": "3.12.0"
+            },
+            "infraestructura": "Runtime, nodos, workers y terminación gestionados por Databricks; no equivalen a un cluster clásico configurable",
+            "autorizacion_docente_serverless": "PENDIENTE"
+          }
+        },
+        "url": "https://dbc-5490c6a5-5215.cloud.databricks.com/?o=7474655525361249#job/164482682079093/run/128298002079637"
+      },
+      {
+        "run_id": 592769852166445,
+        "foto": "IMG_8271.HEIC",
+        "foto_origen": "s3://cc3105-raw-869227452861-us-east-2-an/img/IMG_8271.HEIC",
+        "fecha_exif": "2026-07-09",
+        "semana_foto": "2026-07-07",
+        "sha256_imagen": "ef3209b16913494630a1c3378bd37440dfb73f44c371e545df93ab17548ce425",
+        "fotos_leidas_bronce": 1,
+        "filas_bronce": 110,
+        "fotos_nuevas": 0,
+        "resultado": "SUCCESS",
+        "duraciones_segundos": {
+          "bronze": 17.0,
+          "silver": 65.0,
+          "gold": 147.0
+        },
+        "computo": {
+          "bronze": {
+            "modo_configurado": "serverless",
+            "python": "3.12.3",
+            "spark": "4.2.0",
+            "librerias_instaladas": {
+              "scikit-learn": "1.7.2",
+              "pandas": "2.3.3",
+              "scipy": "1.16.3",
+              "mlflow-skinny": "3.12.0"
+            },
+            "infraestructura": "Runtime, nodos, workers y terminación gestionados por Databricks; no equivalen a un cluster clásico configurable",
+            "autorizacion_docente_serverless": "PENDIENTE"
+          },
+          "silver": {
+            "modo_configurado": "serverless",
+            "python": "3.12.3",
+            "spark": "4.2.0",
+            "librerias_instaladas": {
+              "pillow-heif": "1.1.1",
+              "rapidocr-onnxruntime": "1.4.4",
+              "opencv-python": "4.11.0.86",
+              "openpyxl": "3.1.5",
+              "scikit-learn": "1.7.2",
+              "pandas": "2.3.3",
+              "scipy": "1.16.3",
+              "mlflow-skinny": "3.12.0"
+            },
+            "infraestructura": "Runtime, nodos, workers y terminación gestionados por Databricks; no equivalen a un cluster clásico configurable",
+            "autorizacion_docente_serverless": "PENDIENTE"
+          },
+          "gold": {
+            "modo_configurado": "serverless",
+            "python": "3.12.3",
+            "spark": "4.2.0",
+            "librerias_instaladas": {
+              "scikit-learn": "1.6.1",
+              "pandas": "2.3.3",
+              "scipy": "1.15.3",
+              "mlflow-skinny": "3.12.0"
+            },
+            "infraestructura": "Runtime, nodos, workers y terminación gestionados por Databricks; no equivalen a un cluster clásico configurable",
+            "autorizacion_docente_serverless": "PENDIENTE"
+          }
+        },
+        "url": "https://dbc-5490c6a5-5215.cloud.databricks.com/?o=7474655525361249#job/164482682079093/run/592769852166445"
+      }
+    ],
+    "hash_exif_coincide_con_bronce": true,
+    "tipo_evidencia": "API Databricks y EXIF de binarios verificados; no son capturas de pantalla",
+    "capturas_adjuntas": true,
+    "profesor": {
+      "profesor": "arodriguezo@uvg.edu.gt",
+      "activo": true,
+      "grupo": "admins",
+      "permiso_heredado_job": "CAN_MANAGE",
+      "puede_disparar_job_por_permiso": true,
+      "sesion_personal_del_profesor_probada": false,
+      "permisos_modificados": false,
+      "experimentos_mlflow": [
+        {
+          "experiment_id": "1127466480854104",
+          "grupo": "admins",
+          "puede_administrar": true
+        },
+        {
+          "experiment_id": "542580162755419",
+          "grupo": "admins",
+          "puede_administrar": true
+        }
+      ]
+    },
+    "compute_mode": "serverless",
+    "conformidad_docente_computo": "PENDIENTE",
+    "prueba_job_cluster": "Error: Only serverless compute is supported in the workspace.",
+    "schedule": {
+      "quartz_cron_expression": "0 0 10 ? * TUE",
+      "timezone_id": "America/Guatemala",
+      "pause_status": "UNPAUSED"
+    },
+    "alerta_configurada": true,
+    "ruta_capturas": "docs/evidencias/fase4/"
+  },
+  "api_publica": {
+    "url_publica": "http://165.22.137.8:8000",
+    "probado_desde_fuera_del_droplet": true,
+    "endpoints": {
+      "/health": {
+        "http": 200,
+        "body": {
+          "status": "ok",
+          "release": "9fca51e2e2f149e2a1b8bf69048e9366",
+          "fecha_corte": "2026-11-24",
+          "fuente_default": "mem",
+          "origen": "S3_ORO",
+          "validacion_ocr": "MUESTRA_HUMANA_20_FOTOS_COMPLETA"
+        }
+      },
+      "/docs": {
+        "http": 200
+      },
+      "/": {
+        "http": 200
+      },
+      "/precios/actual?fuente=mem": {
+        "http": 200,
+        "body": {
+          "fuente": "mem",
+          "datos": [
+            {
+              "semana": "2026-11-10",
+              "combustible": "diesel",
+              "precio_promedio": 41.01,
+              "precio_minimo": 41.01,
+              "precio_maximo": 41.01,
+              "observaciones": 1,
+              "ubicaciones": 1,
+              "semana_cerrada": true,
+              "fuente": "mem",
+              "estado_calidad": "FUENTE_OFICIAL_RETROSPECTIVA",
+              "desactualizado": true
+            },
+            {
+              "semana": "2026-11-10",
+              "combustible": "regular",
+              "precio_promedio": 29.98,
+              "precio_minimo": 29.98,
+              "precio_maximo": 29.98,
+              "observaciones": 1,
+              "ubicaciones": 1,
+              "semana_cerrada": true,
+              "fuente": "mem",
+              "estado_calidad": "FUENTE_OFICIAL_RETROSPECTIVA",
+              "desactualizado": true
+            },
+            {
+              "semana": "2026-11-10",
+              "combustible": "super",
+              "precio_promedio": 32.49,
+              "precio_minimo": 32.49,
+              "precio_maximo": 32.49,
+              "observaciones": 1,
+              "ubicaciones": 1,
+              "semana_cerrada": true,
+              "fuente": "mem",
+              "estado_calidad": "FUENTE_OFICIAL_RETROSPECTIVA",
+              "desactualizado": true
+            }
+          ]
+        }
+      },
+      "/precios?combustible=diesel&desde=2026-10-01&hasta=2026-11-30&limit=2": {
+        "http": 200,
+        "body": {
+          "fuente": "mem",
+          "total": 6,
+          "limit": 2,
+          "offset": 0,
+          "datos": [
+            {
+              "semana": "2026-11-10",
+              "combustible": "diesel",
+              "precio_promedio": 41.01,
+              "precio_minimo": 41.01,
+              "precio_maximo": 41.01,
+              "observaciones": 1,
+              "ubicaciones": 1,
+              "semana_cerrada": true,
+              "fuente": "mem",
+              "estado_calidad": "FUENTE_OFICIAL_RETROSPECTIVA"
+            },
+            {
+              "semana": "2026-11-03",
+              "combustible": "diesel",
+              "precio_promedio": 41.7557142857,
+              "precio_minimo": 41.01,
+              "precio_maximo": 41.88,
+              "observaciones": 7,
+              "ubicaciones": 1,
+              "semana_cerrada": true,
+              "fuente": "mem",
+              "estado_calidad": "FUENTE_OFICIAL_RETROSPECTIVA"
+            }
+          ]
+        }
+      },
+      "/modelo/metricas?fuente=mem": {
+        "http": 200,
+        "body": {
+          "fuente": "mem",
+          "fecha_corte": "2026-11-24",
+          "modelo": "arbol",
+          "accuracy": 0.587529976,
+          "macro_f1": 0.5416475461,
+          "baseline_accuracy": 0.5707434053,
+          "baseline_macro_f1": 0.5577695223,
+          "n_prueba": 417,
+          "estado_calidad": "FUENTE_OFICIAL_RETROSPECTIVA",
+          "mlflow_run_id": "eec500dc16034cf2a50d7835aefe140e",
+          "horizonte_semanas": 1
+        }
+      },
+      "/proyecto/resumen": {
+        "http": 200
+      },
+      "/prediccion/historica?combustible=super&fuente=mem": {
+        "http": 200,
+        "body": {
+          "semana": "2026-11-10",
+          "combustible": "super",
+          "semana_datos": "2026-11-03",
+          "fecha_corte_simulada": "2026-11-09",
+          "entrenamiento_hasta": "2024-03-11",
+          "generado_el": "2026-11-24T20:12:23.319570-06:00",
+          "modo": "evaluacion_historica",
+          "horizonte_semanas": 1,
+          "prediccion": "baja",
+          "probabilidad": 0.8488553268,
+          "direccion_real": "baja",
+          "baseline": "baja",
+          "acierto": true,
+          "baseline_acierto": true,
+          "precio_semana_base": 33.2528571429,
+          "precio_semana_objetivo": 32.49,
+          "variacion_real_q": -0.76,
+          "fuente": "mem",
+          "mlflow_run_id": "eec500dc16034cf2a50d7835aefe140e",
+          "es_pronostico_vigente": false
+        }
+      },
+      "/prediccion/historica?combustible=regular&fuente=mem": {
+        "http": 200,
+        "body": {
+          "semana": "2026-11-10",
+          "combustible": "regular",
+          "semana_datos": "2026-11-03",
+          "fecha_corte_simulada": "2026-11-09",
+          "entrenamiento_hasta": "2024-03-11",
+          "generado_el": "2026-11-24T20:12:23.319570-06:00",
+          "modo": "evaluacion_historica",
+          "horizonte_semanas": 1,
+          "prediccion": "baja",
+          "probabilidad": 0.8488553268,
+          "direccion_real": "baja",
+          "baseline": "baja",
+          "acierto": true,
+          "baseline_acierto": true,
+          "precio_semana_base": 30.7171428571,
+          "precio_semana_objetivo": 29.98,
+          "variacion_real_q": -0.74,
+          "fuente": "mem",
+          "mlflow_run_id": "eec500dc16034cf2a50d7835aefe140e",
+          "es_pronostico_vigente": false
+        }
+      },
+      "/prediccion/historica?combustible=diesel&fuente=mem": {
+        "http": 200,
+        "body": {
+          "semana": "2026-11-10",
+          "combustible": "diesel",
+          "semana_datos": "2026-11-03",
+          "fecha_corte_simulada": "2026-11-09",
+          "entrenamiento_hasta": "2024-03-11",
+          "generado_el": "2026-11-24T20:12:23.319570-06:00",
+          "modo": "evaluacion_historica",
+          "horizonte_semanas": 1,
+          "prediccion": "baja",
+          "probabilidad": 0.8488553268,
+          "direccion_real": "baja",
+          "baseline": "baja",
+          "acierto": true,
+          "baseline_acierto": true,
+          "precio_semana_base": 41.7557142857,
+          "precio_semana_objetivo": 41.01,
+          "variacion_real_q": -0.75,
+          "fuente": "mem",
+          "mlflow_run_id": "eec500dc16034cf2a50d7835aefe140e",
+          "es_pronostico_vigente": false
+        }
+      },
+      "/prediccion?combustible=super": {
+        "http": 200,
+        "body": {
+          "semana": "2026-11-10",
+          "combustible": "super",
+          "semana_datos": "2026-11-03",
+          "fecha_corte_simulada": "2026-11-09",
+          "entrenamiento_hasta": "2024-03-11",
+          "generado_el": "2026-11-24T20:12:23.319570-06:00",
+          "modo": "evaluacion_historica",
+          "horizonte_semanas": 1,
+          "prediccion": "baja",
+          "probabilidad": 0.8488553268,
+          "direccion_real": "baja",
+          "baseline": "baja",
+          "acierto": true,
+          "baseline_acierto": true,
+          "precio_semana_base": 33.2528571429,
+          "precio_semana_objetivo": 32.49,
+          "variacion_real_q": -0.76,
+          "fuente": "mem",
+          "mlflow_run_id": "eec500dc16034cf2a50d7835aefe140e",
+          "es_pronostico_vigente": false
+        }
+      },
+      "/prediccion?combustible=regular": {
+        "http": 200,
+        "body": {
+          "semana": "2026-11-10",
+          "combustible": "regular",
+          "semana_datos": "2026-11-03",
+          "fecha_corte_simulada": "2026-11-09",
+          "entrenamiento_hasta": "2024-03-11",
+          "generado_el": "2026-11-24T20:12:23.319570-06:00",
+          "modo": "evaluacion_historica",
+          "horizonte_semanas": 1,
+          "prediccion": "baja",
+          "probabilidad": 0.8488553268,
+          "direccion_real": "baja",
+          "baseline": "baja",
+          "acierto": true,
+          "baseline_acierto": true,
+          "precio_semana_base": 30.7171428571,
+          "precio_semana_objetivo": 29.98,
+          "variacion_real_q": -0.74,
+          "fuente": "mem",
+          "mlflow_run_id": "eec500dc16034cf2a50d7835aefe140e",
+          "es_pronostico_vigente": false
+        }
+      },
+      "/prediccion?combustible=diesel": {
+        "http": 200,
+        "body": {
+          "semana": "2026-11-10",
+          "combustible": "diesel",
+          "semana_datos": "2026-11-03",
+          "fecha_corte_simulada": "2026-11-09",
+          "entrenamiento_hasta": "2024-03-11",
+          "generado_el": "2026-11-24T20:12:23.319570-06:00",
+          "modo": "evaluacion_historica",
+          "horizonte_semanas": 1,
+          "prediccion": "baja",
+          "probabilidad": 0.8488553268,
+          "direccion_real": "baja",
+          "baseline": "baja",
+          "acierto": true,
+          "baseline_acierto": true,
+          "precio_semana_base": 41.7557142857,
+          "precio_semana_objetivo": 41.01,
+          "variacion_real_q": -0.75,
+          "fuente": "mem",
+          "mlflow_run_id": "eec500dc16034cf2a50d7835aefe140e",
+          "es_pronostico_vigente": false
+        }
+      },
+      "/.env": {
+        "http": 404
+      },
+      "/api/.env": {
+        "http": 404
+      },
+      "/.aws/credentials": {
+        "http": 404
+      },
+      "/ui-assets/..%2f..%2f.env": {
+        "http": 404
+      },
+      "/prediccion?combustible=super&modo=vigente": {
+        "http": 503
+      },
+      "/prediccion?combustible=regular&modo=vigente": {
+        "http": 503
+      },
+      "/prediccion?combustible=diesel&modo=vigente": {
+        "http": 503
+      }
+    },
+    "resultado": "OK",
+    "servicio_8003_modificado": false,
+    "verificado_el": "2026-11-25T00:02:05.825632-06:00",
+    "modo_prediccion_predeterminado": "historica"
+  },
+  "endpoint_prediccion": {
+    "url_publica": "http://165.22.137.8:8000",
+    "verificado_el": "2026-11-25T00:02:05.825632-06:00",
+    "endpoint": "/prediccion",
+    "modo_predeterminado": "historica",
+    "fuente": "mem",
+    "probado_desde_fuera_del_droplet": true,
+    "combustibles": {
+      "super": {
+        "http": 200,
+        "body": {
+          "semana": "2026-11-10",
+          "combustible": "super",
+          "semana_datos": "2026-11-03",
+          "fecha_corte_simulada": "2026-11-09",
+          "entrenamiento_hasta": "2024-03-11",
+          "generado_el": "2026-11-24T20:12:23.319570-06:00",
+          "modo": "evaluacion_historica",
+          "horizonte_semanas": 1,
+          "prediccion": "baja",
+          "probabilidad": 0.8488553268,
+          "direccion_real": "baja",
+          "baseline": "baja",
+          "acierto": true,
+          "baseline_acierto": true,
+          "precio_semana_base": 33.2528571429,
+          "precio_semana_objetivo": 32.49,
+          "variacion_real_q": -0.76,
+          "fuente": "mem",
+          "mlflow_run_id": "eec500dc16034cf2a50d7835aefe140e",
+          "es_pronostico_vigente": false
+        },
+        "vigente_http": 503
+      },
+      "regular": {
+        "http": 200,
+        "body": {
+          "semana": "2026-11-10",
+          "combustible": "regular",
+          "semana_datos": "2026-11-03",
+          "fecha_corte_simulada": "2026-11-09",
+          "entrenamiento_hasta": "2024-03-11",
+          "generado_el": "2026-11-24T20:12:23.319570-06:00",
+          "modo": "evaluacion_historica",
+          "horizonte_semanas": 1,
+          "prediccion": "baja",
+          "probabilidad": 0.8488553268,
+          "direccion_real": "baja",
+          "baseline": "baja",
+          "acierto": true,
+          "baseline_acierto": true,
+          "precio_semana_base": 30.7171428571,
+          "precio_semana_objetivo": 29.98,
+          "variacion_real_q": -0.74,
+          "fuente": "mem",
+          "mlflow_run_id": "eec500dc16034cf2a50d7835aefe140e",
+          "es_pronostico_vigente": false
+        },
+        "vigente_http": 503
+      },
+      "diesel": {
+        "http": 200,
+        "body": {
+          "semana": "2026-11-10",
+          "combustible": "diesel",
+          "semana_datos": "2026-11-03",
+          "fecha_corte_simulada": "2026-11-09",
+          "entrenamiento_hasta": "2024-03-11",
+          "generado_el": "2026-11-24T20:12:23.319570-06:00",
+          "modo": "evaluacion_historica",
+          "horizonte_semanas": 1,
+          "prediccion": "baja",
+          "probabilidad": 0.8488553268,
+          "direccion_real": "baja",
+          "baseline": "baja",
+          "acierto": true,
+          "baseline_acierto": true,
+          "precio_semana_base": 41.7557142857,
+          "precio_semana_objetivo": 41.01,
+          "variacion_real_q": -0.75,
+          "fuente": "mem",
+          "mlflow_run_id": "eec500dc16034cf2a50d7835aefe140e",
+          "es_pronostico_vigente": false
+        },
+        "vigente_http": 503
+      }
+    },
+    "health": {
+      "status": "ok",
+      "release": "9fca51e2e2f149e2a1b8bf69048e9366",
+      "fecha_corte": "2026-11-24",
+      "fuente_default": "mem",
+      "origen": "S3_ORO",
+      "validacion_ocr": "MUESTRA_HUMANA_20_FOTOS_COMPLETA"
+    },
+    "precios_actuales": {
+      "fuente": "mem",
+      "datos": [
+        {
+          "semana": "2026-11-10",
+          "combustible": "diesel",
+          "precio_promedio": 41.01,
+          "precio_minimo": 41.01,
+          "precio_maximo": 41.01,
+          "observaciones": 1,
+          "ubicaciones": 1,
+          "semana_cerrada": true,
+          "fuente": "mem",
+          "estado_calidad": "FUENTE_OFICIAL_RETROSPECTIVA",
+          "desactualizado": true
+        },
+        {
+          "semana": "2026-11-10",
+          "combustible": "regular",
+          "precio_promedio": 29.98,
+          "precio_minimo": 29.98,
+          "precio_maximo": 29.98,
+          "observaciones": 1,
+          "ubicaciones": 1,
+          "semana_cerrada": true,
+          "fuente": "mem",
+          "estado_calidad": "FUENTE_OFICIAL_RETROSPECTIVA",
+          "desactualizado": true
+        },
+        {
+          "semana": "2026-11-10",
+          "combustible": "super",
+          "precio_promedio": 32.49,
+          "precio_minimo": 32.49,
+          "precio_maximo": 32.49,
+          "observaciones": 1,
+          "ubicaciones": 1,
+          "semana_cerrada": true,
+          "fuente": "mem",
+          "estado_calidad": "FUENTE_OFICIAL_RETROSPECTIVA",
+          "desactualizado": true
+        }
+      ]
+    }
+  },
+  "credenciales_api": {
+    "proveedor": "env",
+    "credenciales_presentes": true,
+    "archivo_aws_montado": false,
+    "lectura_oro": 200,
+    "escritura": "PERMITIDA",
+    "limpieza_objeto_prueba": "OK",
+    "clave_prueba": "cc3105-equipo5/api/_verificacion_permisos_equipo03/873dc7979f414bdc95b16f00c94d6088.txt",
+    "fecha": "2026-11-25T06:19:21.699067+00:00",
+    "env_modo": "0o600",
+    "montajes": [],
+    "claves_incluidas_en_imagen": false,
+    "env_incluido_en_imagen": false,
+    "aws_incluido_en_imagen": false,
+    "otro_servicio_sin_cambios": true,
+    "http_publico": {
+      "/health": 200,
+      "/docs": 200,
+      "/prediccion?combustible=super": 200,
+      "/prediccion?combustible=regular": 200,
+      "/prediccion?combustible=diesel": 200
+    }
+  }
+}

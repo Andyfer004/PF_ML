@@ -1,100 +1,150 @@
-# PF-ML — Precios de combustibles en Guatemala
+# Predicción del precio de la gasolina en Guatemala
 
-Proyecto del equipo 5 para extraer precios de fotografías de surtidores y clasificar la variación semanal de Súper, Regular y Diésel: **sube, estable o baja**. Los precios se expresan en quetzales por galón.
+Proyecto final de CC3105, Universidad del Valle de Guatemala. **Equipo 5.**
 
-El OCR y el predictor son componentes separados. La serie oficial del Ministerio de Energía y Minas (MEM) permite entrenar el predictor sin depender de lecturas dudosas de fotografías. Las dos fuentes se evalúan por separado.
+El proyecto convierte fotografías de precios en tablas Delta y clasifica si súper, regular y diésel suben, bajan o se mantienen la semana siguiente. Usa semanas de martes a lunes y precios en quetzales por galón. Las fotografías y el histórico oficial del MEM se conservan como fuentes separadas.
 
-## Estado
+- **Demo pública:** [interfaz web](http://165.22.137.8:8000/).
+- **API:** [Swagger y consultas interactivas](http://165.22.137.8:8000/docs).
+- **Repositorio público:** [Andyfer004/PF_ML](https://github.com/Andyfer004/PF_ML).
+- **Databricks:** [Job del proyecto](https://dbc-5490c6a5-5215.cloud.databricks.com/jobs/164482682079093?o=7474655525361249).
 
-- OCR con RapidOCR, rectificación de pantallas y asociación por etiquetas de combustible. Se procesaron 110 fotografías; los valores ambiguos se envían a revisión. Falta completar la validación humana independiente de al menos 20 fotos.
-- Predictor MEM entrenado y ejecutado en Databricks con seguimiento de experimentos y artefactos en MLflow. En la evaluación temporal del corte 2026-11-16, el árbol obtuvo **61.4 % de exactitud** frente a **56.8 % del baseline**, sobre 414 casos de prueba. Macro F1: 0.576 y 0.556, respectivamente. Es una evaluación retrospectiva; las revisiones históricas de la fuente pueden afectar una evaluación operacional.
-- Predictor de fotografías experimental: seis casos de prueba, insuficientes para una conclusión de desempeño. Bloquea pronósticos cuando la última observación es demasiado antigua.
-- Ingesta Bronze preparada con modo de simulación y escritura idempotente. La escritura está pendiente del permiso `CREATE_EXTERNAL_TABLE` en la ubicación externa. La publicación en Silver/Gold y el servicio en DigitalOcean siguen pendientes.
+La cuenta SSH asignada es `cc3105-03@165.22.137.8`. El Job existente conserva el nombre técnico `equipo-03-pipeline` y el parámetro heredado `equipo=03`. Estos identificadores no cambian el número del equipo: el catálogo es `lakehouse_equipo5` y los datos pertenecen a los prefijos del equipo 5. Se mantienen esos nombres para conservar la configuración desplegada y su historial.
 
-## Instalación
+## Resultados verificados
 
-Requiere Python 3.12. Desde la raíz del repositorio:
+| Componente | Resultado |
+| --- | --- |
+| Bronce | 110 fotografías originales. Repetir la carga no duplica registros. |
+| Plata | 126 registros aceptados y 278 rechazados con motivo. Una fotografía puede aportar ambos. |
+| Revisión humana | 20 fotografías revisadas, 33 precios legibles, 18 extraídos y 17 correctos. |
+| Calidad OCR | Precisión 94.4 %, cobertura 54.5 % y exactitud incluyendo omisiones 51.5 %. Tolerancia Q0.02. |
+| Histórico MEM | 11,427 observaciones únicas, desde 2013-02-08 hasta 2026-11-10. |
+| Modelo MEM | 417 casos de prueba temporal. Exactitud 58.75 % frente a 57.07 % de la línea base. |
+| Macro F1 | Modelo 0.542 frente a 0.558 de la línea base: no la supera en esta métrica. |
+| Orquestación | Tres tareas encadenadas, programación semanal y correo de fallo probado. |
+| Pruebas | 70 pruebas Python y 12 pruebas de interfaz. GitHub Actions ejecuta ambas suites. |
+
+La línea base repite la última dirección conocida. El modelo usa separación temporal con purga de etiquetas entre bloques; no reparte aleatoriamente las semanas. Los experimentos de MLflow conservan el modelo evaluado separado del reajustado para producción.
+
+**La demostración es histórica.** `/prediccion?combustible=super` devuelve la evaluación de la semana siguiente al corte simulado, con fechas, probabilidad y resultado real. La semana demostrada es 2026-11-10, con corte simulado 2026-11-09. No se presenta como pronóstico vigente al día de la consulta. `modo=vigente` responde 503 cuando faltan precios recientes.
+
+## Entregables
+
+- [Diagrama de arquitectura elegido por el equipo](docs/arquitectura_usuario.png).
+- [Informe técnico](docs/informe.pdf): cinco páginas, incluyendo el diagrama.
+- [Presentación del equipo](presentacion/presentacion_jurado.pdf).
+- [Resumen para el jurado](presentacion/resumen_jurado.pdf): una página con la URL pública.
+- [Capturas de Databricks](docs/evidencias/fase4/README.md): historial y duración de dos ejecuciones exitosas.
+- [Configuración real del cómputo](pipelines/computo_documentado.json), [Job exportado](pipelines/job_exportado.json) y [evidencia operativa](docs/evidencia_operativa.json).
+
+El informe y la presentación se conservan como PDF finales. `python scripts/build_jury_summary.py` regenera únicamente el resumen académico. El diagrama PNG es el archivo proporcionado por el equipo; las fuentes Graphviz en `docs/antecedentes/` corresponden a versiones anteriores.
+
+## Organización
+
+```text
+PF_ML/
+├── README.md
+├── docs/                         # Informe, diagrama definitivo y evidencias
+│   ├── evidencias/fase4/          # Tres capturas y su manifiesto
+│   └── antecedentes/             # Diagramas anteriores
+├── pipelines/
+│   ├── 01_bronze.py
+│   ├── 02_silver.py
+│   ├── 03_gold.py
+│   ├── job.json                  # Plantilla reproducible
+│   ├── job_exportado.json        # Configuración del Job operativo
+│   ├── auxiliares/               # Revisión manual y publicación auxiliar
+│   └── antecedentes/             # Prototipos y configuración clásica no ejecutada
+├── src/                          # OCR, calidad, modelo y operaciones Delta
+├── api/                          # FastAPI, interfaz web y Docker
+├── data/                         # MEM original, referencias humanas y configuración OCR
+├── scripts/                      # Despliegue, ejecución y verificación
+├── tests/                        # Pruebas Python, interfaz y colección curl
+└── presentacion/                 # Presentación y resumen para el jurado
+```
+
+Las fotografías originales, cachés, modelos entrenados, salidas locales, `.env`, llaves SSH y credenciales no se publican. `src/gas_pipeline.py`, la EDA y los notebooks en `pipelines/antecedentes/` son el piloto inicial, no el pipeline definitivo.
+
+## Preparación local y pruebas
+
+Requiere Python 3.12. Para ejecutar las pruebas sin AWS ni fotografías privadas:
 
 ```bash
+git clone https://github.com/Andyfer004/PF_ML.git
+cd PF_ML
 python3.12 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements-model.txt
-```
-
-Las fotografías, credenciales, modelos entrenados, cachés y resultados de ejecución se mantienen fuera de Git. Las dependencias descargan sus propios modelos OCR al instalarse o inicializarse, según la configuración del paquete.
-
-## Predictor local
-
-Se incluye una copia del archivo público del MEM, los datos normalizados y un manifiesto con URL de origen y SHA-256. La población corresponde a la ciudad capital; no equivale al precio de una estación fotografiada.
-
-```bash
-python scripts/prepare_mem.py
-python scripts/train_predictor.py --source mem
-python scripts/predict.py --source mem --combustible super
-```
-
-Para reproducir el corte de la evaluación reportada:
-
-```bash
-python scripts/train_predictor.py --source mem --as-of 2026-11-16
-```
-
-El entrenamiento agrupa observaciones por semana de martes a lunes y construye objetivos a exactamente siete días. Divide cronológicamente entrenamiento, validación y prueba; ajusta transformaciones solo con entrenamiento y selecciona entre regresión logística y árbol usando validación. Evalúa frente a un baseline que conserva la última dirección conocida. Después de evaluar, reajusta el modelo elegido con los datos disponibles para producción.
-
-Una variación mayor de Q0.10 se clasifica como subida, menor de −Q0.10 como bajada, y el resto como estable. Las etiquetas requieren semanas objetivo cerradas. Los artefactos se guardan en `output/modelos/<fuente>/<ejecución>/`, con métricas, tablas de evaluación y `modelo.joblib`. El archivo `latest.json` identifica la ejecución vigente. El comando de predicción evita pronósticos vencidos.
-
-## Databricks
-
-Instalar Databricks CLI y autenticar el perfil del proyecto mediante OAuth:
-
-```bash
-databricks auth login --host https://dbc-5490c6a5-5215.cloud.databricks.com --profile PF-ML
-bash scripts/deploy_notebooks.sh
-```
-
-El despliegue importa archivos a `/Users/fue22944@uvg.edu.gt/PF-ML` y actualiza únicamente los archivos del proyecto. No inicia ejecuciones. Las rutas de los notebooks corresponden al workspace del equipo y deben ajustarse si se usa otro destino.
-
-| Notebook | Función |
-| --- | --- |
-| `00_diagnostico` | Inventario, metadata y muestra de OCR del origen autorizado |
-| `01_bronze` | Simulación e ingesta de binarios con trazabilidad; `dry_run=true` por defecto |
-| `02_extraccion_preview` | Primera exploración de extracción de precios |
-| `03_revision_manual` | Revisión visual con campos vacíos y confirmación explícita por foto |
-| `04_predictor` | Entrenamiento por fuente, evaluación temporal y registro en MLflow |
-| `05_ocr_validado` | Extracción con controles de calidad y exportación de candidatos |
-
-El origen de fotografías es `s3://cc3105-raw-869227452861-us-east-2-an/img/`, accesible mediante la external location del curso. No se requieren credenciales AWS del profesor en este repositorio. `pipelines/validacion_bronze_job.json` define la comprobación de simulación, ingesta y repetición; requiere resolver los permisos antes de ejecutar la escritura.
-
-En `04_predictor`, seleccionar `fuente=mem` para la serie oficial. Para `fuente=fotos`, ejecutar primero `05_ocr_validado` y revisar sus candidatos. Esta última opción conserva el estado experimental y las exclusiones por lecturas ambiguas.
-
-## OCR y validación
-
-Para ejecutar localmente, guardar el JSON devuelto por `00_diagnostico` como `output/diagnostico_databricks.json` y usar la conexión autenticada para descargar las imágenes autorizadas:
-
-```bash
-python scripts/download_photos.py --all
-python scripts/run_ocr.py --workers 2
-```
-
-Las fotografías se guardan en `data/images/`, respetando subcarpetas. El reporte queda en `output/ocr_completo.json`. Las plantillas geométricas están en `data/ocr_layout_templates.json`; las exclusiones pendientes de confirmación están en `data/ocr_review_flags.csv`. Los precios de combustibles se leen individualmente y no se completan suponiendo diferencias fijas.
-
-Revisar las fotos con `03_revision_manual`, identificar al revisor y confirmar cada archivo. Exportar su `referencias_ocr_revisadas.json` al directorio local `output/` y evaluar:
-
-```bash
-python scripts/evaluate_ocr.py --references output/referencias_ocr_revisadas.json
-python scripts/train_predictor.py --source fotos
-```
-
-La evaluación informa cobertura, precisión entre precios extraídos y exactitud contando omisiones. Las referencias sin confirmación explícita del equipo no cierran la validación humana. El entrenamiento de fotografías sigue usando candidatos OCR y sus exclusiones; guardar referencias de evaluación no reemplaza automáticamente esos candidatos ni los convierte en datos certificados.
-
-## Verificación
-
-```bash
+python -m pip install -r requirements-test.txt
 python -m unittest discover -s tests -v
+npm --prefix tests/ui ci --no-audit --no-fund
+npm --prefix tests/ui test
 ```
 
-Las pruebas cubren precios y etiquetas, cuarentena de lecturas ambiguas, evaluación con omisiones, separación temporal, semanas faltantes, semanas abiertas y bloqueo de pronósticos vencidos.
+Para desarrollar OCR y entrenar localmente, instalar además `requirements-model.txt`. Los originales del MEM y su manifiesto están en `data/external/mem/`. Las referencias humanas confirmadas están en `data/evaluacion_ocr_confirmada.csv`. Las fotos requieren acceso al origen compartido y permanecen en `data/images/`, fuera de Git.
 
-## Piloto inicial
+## Pipeline en Databricks
 
-`src/gas_pipeline.py`, `requirements.txt`, `data/lecturas_manuales.csv`, `output/gas_prices.csv` y `notebooks/01_eda_gas_prices.ipynb` conservan el piloto inicial y su EDA. Ese piloto utiliza lecturas manuales y diferencias fijas entre algunos combustibles; sus estimaciones no alimentan el predictor actual. `reportes/PF1_MLOPS.pdf` contiene la entrega anterior.
+1. Autenticar Databricks CLI con el perfil del proyecto:
+
+   ```bash
+   databricks auth login --host https://dbc-5490c6a5-5215.cloud.databricks.com --profile PF-ML
+   ```
+
+2. Clonar `https://github.com/Andyfer004/PF_ML.git` como Git folder dentro del usuario del equipo. Las tareas ejecutan `pipelines/01_bronze`, `pipelines/02_silver` y `pipelines/03_gold`; `workspace_path` debe apuntar a la raíz del clon con prefijo `/Workspace`. Los widgets reciben rutas, catálogo, fecha de corte, fuente y umbral.
+3. Usar **Run now** en el Job compartido. Bronce carga binarios con `binaryFile` y `MERGE`; Plata reutiliza la caché o ejecuta OCR y guarda rechazos; Oro recalcula indicadores, registra MLflow y publica Parquet.
+4. Para importar una copia independiente al directorio histórico del workspace, usar `python scripts/workspace_deploy.py`. Esta alternativa no reemplaza el Git folder.
+5. `scripts/run_pipeline.py` permite ejecutar y conservar evidencia por API. Mantiene el cómputo del Job existente; no seleccionar `--compute classic` en este workspace.
+
+El Job operativo está programado los martes a las 10:00, `America/Guatemala`, y avisa por correo si falla. La prueba controlada y recepción están documentadas en [evidencia de alerta](docs/evidencia_alerta.json). El profesor tiene acceso heredado al Job y los experimentos MLflow.
+
+**Cómputo real:** serverless, con Python 3.12.3 y Spark 4.2.0 registrados. El workspace rechazó crear un Job Cluster clásico porque solo admite serverless. `pipelines/computo_documentado.json` detalla las librerías reales por tarea; la conformidad docente frente al requisito de cómputo clásico sigue siendo una salvedad.
+
+### Almacenamiento
+
+| Uso | Ruta |
+| --- | --- |
+| Fotografías del profesor, lectura | `s3://cc3105-raw-869227452861-us-east-2-an/img/` |
+| Bronce Delta | `s3://cc3105-cusn-869227452861-us-east-2-an/equipo-05/` |
+| Plata Delta | `s3://cc3105-ag-869227452861-us-east-2-an/equipo-05/` |
+| Oro Delta | `s3://cc3105-au-869227452861-us-east-2-an/equipo-05/` |
+| Publicación Parquet de Oro para la API | `s3://cc3105-au-869227452861-us-east-2-an/cc3105-equipo5/api/` |
+
+La última ruta corresponde al prefijo autorizado de la identidad AWS y contiene `current.json` y publicaciones versionadas. No es intercambiable con `equipo-05/`. Unity Catalog gobierna el acceso de Databricks; el Droplet usa sus propias credenciales AWS.
+
+## API y despliegue
+
+Docker aísla las dependencias fijadas en `requirements-api.lock`. El servicio usa `restart: unless-stopped` y publica el puerto 8000. Los documentos y el frontend comparten origen con la API.
+
+| Endpoint | Uso |
+| --- | --- |
+| `GET /health` | Estado y publicación Oro cargada. |
+| `GET /precios/actual` | Último precio por combustible. |
+| `GET /precios` | Histórico con combustible, fechas, fuente y límite. |
+| `GET /prediccion?combustible=super` | Evaluación histórica identificada como tal. |
+| `GET /prediccion?combustible=super&modo=vigente` | Próxima semana de calendario; 503 si faltan datos recientes. |
+| `GET /modelo/metricas` | Modelo y línea base. |
+| `GET /docs` | Swagger. |
+
+La API únicamente realiza operaciones de lectura. Las credenciales son administradas por el catedrático y se cargan desde `api/.env` en el servidor, con permisos `600`. No se montan perfiles AWS en el contenedor ni se incluyen claves en la imagen. La prueba de permisos confirmó que la identidad proporcionada también puede escribir; esto no se describe como una restricción IAM de solo lectura. [Política mínima de lectura propuesta](docs/iam_oro_lectura.json).
+
+El despliegue asignado vive en `/home/cc3105-03/gasolina-equipo-05/`:
+
+```bash
+# Desde el proyecto, con la llave local asignada y Oro ya publicado:
+python scripts/deploy_droplet.py
+python scripts/verify_droplet.py
+
+# Prueba pública de precios y predicción de los tres combustibles:
+bash tests/consultas_api.sh http://165.22.137.8:8000
+```
+
+La primera instalación requiere configurar las variables de `api/.env.example` únicamente en el `.env` real del servidor. `--import-server-credentials` permite importar allí el perfil AWS ya existente sin sacar las claves del Droplet. Los siguientes despliegues conservan el `.env` y la interfaz de publicación. No se modifica el firewall ni otro servicio del servidor.
+
+## Evidencias y alcance
+
+Las [tres capturas](docs/evidencias/fase4/README.md) documentan el historial y dos ejecuciones sin reparación, con fotografías de las semanas 2026-01-27 y 2026-07-07. Ambas releyeron una foto existente y conservaron las 110 filas en Bronce. Las duraciones de la UI y `execution_duration` de la API se identifican por separado en el manifiesto.
+
+El pipeline tiene pruebas de carga incremental, rechazo conservador, idempotencia, validación temporal y filtros de API. GitHub Actions instala dependencias y ejecuta las suites Python y Node sin credenciales. Las capturas complementan la evidencia obtenida por API.
+
+Los aportes de los demás integrantes y la entrega del resumen al jurado 48 horas antes se gestionan por el equipo. Las predicciones históricas demuestran el modelo evaluado; actualizar las fuentes es necesario para producir un pronóstico vigente.

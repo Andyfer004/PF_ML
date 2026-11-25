@@ -1,0 +1,11 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "LeerPublicacionApiEquipo05",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject"],
+      "Resource": "arn:aws:s3:::cc3105-au-869227452861-us-east-2-an/cc3105-equipo5/api/*"
+    }
+  ]
+}

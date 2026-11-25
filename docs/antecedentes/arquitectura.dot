@@ -1,0 +1,34 @@
+digraph plataforma {
+  graph [rankdir=LR, bgcolor="#f7f9fc", pad="0.4", nodesep="0.35", ranksep="0.65", fontname="Helvetica", label="Equipo 3 · S3, Databricks y API", labelloc=t, fontsize=25];
+  node [shape=box, style="rounded,filled", color="#214565", fillcolor="white", fontname="Helvetica", fontsize=16, margin="0.18,0.13"];
+  edge [fontname="Helvetica", fontsize=12, color="#55758b"];
+  raw [label="Fotos compartidas · solo lectura\ns3://cc3105-raw-869227452861-\nus-east-2-an/img/"];
+  mem [label="MEM · XLSX oficial\nHistórico diario original"];
+  uc [label="Unity Catalog\nlakehouse_equipo5\nStorage credentials\nGobierna las tres capas\nxloc-raw / cusn / ag / au", fillcolor="#e5eef7"];
+  subgraph cluster_workspace {
+    label="Workspace Databricks · Job equipo-03-pipeline\nServerless · martes 10:00 America/Guatemala";
+    fontname="Helvetica";fontsize=19;color="#a3b8c8";style="rounded";
+    task_b [label="01_bronze\nIngesta por ruta y hash"];
+    task_s [label="02_silver\nOCR, calidad y MERGE"];
+    task_g [label="03_gold\nSemanas, modelo y publicación"];
+    mlflow [label="MLflow\nParámetros, métricas\ny modelos evaluado / producción"];
+    task_b -> task_s [label="depende"];task_s -> task_g [label="depende"];
+    task_g -> mlflow [label="tracking"];
+  }
+  bronze [label="S3 Bronce · Delta\ns3://cc3105-cusn-869227452861-\nus-east-2-an/equipo-05/\nfotos_precios · mem_archivos"];
+  silver [label="S3 Plata · Delta\ns3://cc3105-ag-869227452861-\nus-east-2-an/equipo-05/\nprecios · rejected · precios_mem\ncaché OCR · calidad"];
+  gold [label="S3 Oro · Delta\ns3://cc3105-au-869227452861-\nus-east-2-an/equipo-05/\nprecio_semanal · variacion_semanal\nfeatures_modelo · predicciones\nmetricas_modelo"];
+  api_files [label="S3 Oro · Parquet para la API\ncc3105-equipo5/api/current.json\nIdentidad temporal autorizada"];
+  droplet [label="Droplet 165.22.137.8\nUsuario asignado: cc3105-03\nDocker + FastAPI\n127.0.0.1:8000\nrestart: unless-stopped"];
+  equipo [label="Equipo 3\nLlave SSH personal"];
+  publico [label="Usuario / jurado\nConsulta HTTP\nPublicación pendiente del profesor"];
+  raw -> task_b [label="binaryFile"];mem -> task_b;
+  uc -> task_b [style=dashed,label="external locations"];
+  task_b -> bronze [label="escribe"];bronze -> task_s [label="lee"];
+  task_s -> silver [label="escribe / actualiza"];silver -> task_g [label="lee"];
+  task_g -> gold [label="indicadores + snapshots"];
+  task_g -> api_files [label="exporta Parquet"];
+  api_files -> droplet [label="S3 · GetObject verificado",color="#087f8c"];
+  equipo -> droplet [label="SSH"];
+  droplet -> publico [label="HTTP · habilita profesor",style=dashed];
+}
